@@ -1,0 +1,117 @@
+﻿@page
+@using Kidoo.Learn.Localization
+@using Kidoo.Learn.Permissions
+@using Kidoo.Learn.Enums;
+@using Kidoo.Learn.Web.Pages.Students
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.Extensions.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout;
+@inject IPageLayout PageLayout
+@inject IStringLocalizer<LearnResource> L
+@inject IAuthorizationService AuthorizationService
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout;
+@inject IPageLayout PageLayout
+@model IndexModel
+@{
+    PageLayout.Content.Title = "Students";
+}
+
+@section scripts
+    {
+    <abp-script src="/Pages/Students/Index.js" />
+}
+
+<abp-card>
+    <abp-card-header>
+        <abp-row>
+            <abp-column size-md="_6">
+                <abp-card-title>@L["Students"]</abp-card-title>
+            </abp-column>
+            <abp-column size-md="_6" class="text-end">
+                @if (await AuthorizationService
+                .IsGrantedAsync(LearnPermissions.Students.Create))
+                {
+                    <abp-button id="NewStudentButton"
+                                text="@L["NewStudent"].Value"
+                                icon="plus"
+                                button-type="Primary"  />
+                }
+            </abp-column>
+        </abp-row>
+
+        <abp-row>  
+            <abp-column size-md="_3">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" id="Input_Filter" />
+                </div>
+            </abp-column>
+
+            <abp-column size-md="_2">
+                <div class="form-group">
+                    <label>Genders.</label>
+                    <select class="form-control" id="Input_FilterGender" asp-items="@Html.GetEnumSelectList<Gender>()">
+                        <option value="">any</option>
+                    </select>
+                </div>
+            </abp-column>
+
+        </abp-row>
+
+        <abp-row>
+
+            <abp-column size-md="_2">
+                <div class="form-group">
+                    <label>Age group.</label>
+                    <select class="form-control" id="Input_FilterAgeGroup" asp-items="@Html.GetEnumSelectList<StudentAgeGroup>()">
+                        <option value="">any</option>
+                    </select>
+                </div>
+            </abp-column> 
+            <abp-column size-md="_2">
+                <div class="form-group">
+                    <label>Districts.</label>
+
+                    <select class="form-control" id="Input_FilterDistrict" asp-items="@Html.GetEnumSelectList<District>()">
+                        <option value="">any</option>
+                    </select>
+                </div>
+            </abp-column>
+
+            <abp-column size-md="_2">
+                <div class="form-group">
+                    <label>Payment Status.</label>
+
+                    <select class="form-control" id="Input_FilterPaymentStatus" asp-items="@Html.GetEnumSelectList<StudentPaymentStatus>()">
+                        <option value="">any</option>
+                    </select>
+                </div>
+            </abp-column>
+
+            <abp-column size-md="_2">
+                <div class="form-group">
+                    <label>Referrals.</label>
+
+                    <select class="form-control" id="Input_FilterReferral" asp-items="@Html.GetEnumSelectList<Referral>()">
+                        <option value="">any</option>
+                    </select>
+                </div>
+            </abp-column>
+             
+            <abp-column size-md="_4" class="text-end">
+                <br />
+                <abp-button id="filterbtn"
+                            text="@L["Find..."].Value"
+                            icon="search"
+                            button-type="Outline_Secondary"
+                            style="width: 150px; height: 40px; font-size: 13px;" />
+            </abp-column>
+
+        </abp-row>
+
+
+    </abp-card-header>
+    <abp-card-body>
+        <abp-table striped-rows="true" id="StudentsTable"></abp-table>
+    </abp-card-body>
+</abp-card>

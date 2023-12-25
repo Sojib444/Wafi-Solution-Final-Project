@@ -1,0 +1,47 @@
+/* Your Global Styles */
+
+:root .lpx-brand-logo {
+    --lpx-logo: url('/images/logo/leptonx/logo-light.png');
+    --lpx-logo-icon: url('/images/logo/leptonx/logo-light-thumbnail.png');
+}
+
+.select-field select {
+    width: 100%;
+    border: 0px solid #c9c9c9;
+    border-radius: 30px;
+    background: #eaf2f7;
+    padding: 0px 24px;
+    position: relative;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: 50px;
+    padding-left: 45px;
+}
+
+
+/* Validation error message */
+.text-danger span, .login_box_main_wrapper .signin-wrapper .left-side form .field-icon .text-danger span {
+    display: block;
+    font-size: 14px;
+    color: red;
+    position:absolute;
+    margin:0px;
+    left:0;
+    top:40px;
+    width:100%;
+}
+
+span.text-danger {
+    width: 100% !important;
+}
+/*.login_box_main_wrapper .signin-wrapper .left-side form .field-icon span {
+    width: 100%;
+}*/
+.login_box_main_wrapper {
+    width: 100% !important;
+}
+
+.index2-footer-wrapper {
+    background-color: #dcd1f3 !important;
+}

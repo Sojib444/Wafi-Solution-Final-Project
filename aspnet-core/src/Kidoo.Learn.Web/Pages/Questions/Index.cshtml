@@ -1,0 +1,78 @@
+﻿@page
+@using Kidoo.Learn.Enums;
+@using Kidoo.Learn.Localization
+@using Kidoo.Learn.Permissions
+@using Kidoo.Learn.Web.Pages.Questions
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<LearnResource> L
+@inject IAuthorizationService AuthorizationService
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout;
+@inject IPageLayout PageLayout
+@model IndexModel
+@{
+    PageLayout.Content.Title = "Questions";
+}
+@section scripts
+{
+    <abp-script src="/Pages/Questions/Index.js" />
+}
+
+<abp-card>
+    <abp-card-header>
+        <abp-row>
+            <abp-column size-md="_6">
+                <abp-card-title>@L["Questions"]</abp-card-title>
+            </abp-column>
+            <abp-column size-md="_6" class="text-end">
+                @if (await AuthorizationService
+                .IsGrantedAsync(LearnPermissions.Question.Create))
+                {
+                    <abp-button id="NewQuestionButton"
+                                text="@L["NewQuestion"].Value"
+                                icon="plus"
+                                button-type="Primary" />
+                }
+            </abp-column>
+        </abp-row>
+        <abp-row>
+            <abp-column size-md="_2">
+                <div class="form-group">
+                    <label>Subject.</label>
+                    <select class="form-control" id="Input_Subject" asp-items="@Html.GetEnumSelectList<Subject>()">
+                        <option value="">any</option>
+                    </select>
+                </div>
+            </abp-column>
+            <abp-column size-md="_2">
+                <div class="form-group">
+                    <label>StoryGroup.</label>
+                    <select class="form-control" id="Input_StoryGroup" asp-items="@Html.GetEnumSelectList<StoryGroup>()">
+                        <option value="">any</option>
+                    </select>
+                </div> 
+            </abp-column>
+            <abp-column size-md="_2">
+                <div class="form-group">
+                    <label>DifficultyLevel.</label>
+                    <select class="form-control" id="Input_DifficultyLevel" asp-items="@Html.GetEnumSelectList<DifficultyLevel>()">
+                        <option value="">any</option>
+                    </select>
+                </div>
+            </abp-column>
+            <abp-column size-md="_6" class="text-end">
+                <br />
+                <abp-button id="filterbtn"
+                            text="@L["Find..."].Value"
+                            icon="search"
+                            button-type="Outline_Secondary"
+                            style="width: 150px; height: 40px; font-size: 13px;" />
+            </abp-column>
+        </abp-row>
+
+
+    </abp-card-header>
+    <abp-card-body>
+        <abp-table striped-rows="true" id="QuestionTable"></abp-table>
+    </abp-card-body>
+</abp-card>

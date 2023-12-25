@@ -1,0 +1,100 @@
+{
+  "culture": "en",
+  "texts": {
+    "Menu:Home": "Home",
+    "Menu:Exam": "Exam",
+    "Menu:ExamResult": "Result",
+    "Menu:Dashboard": "Dashboard",
+    "Menu:LogOut": "Log out",
+    "Menu:Question": "Question",
+    "Welcome": "Welcome",
+    "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information, visit abp.io.",
+
+    "SuccessfullyDeleted": "Successfully Deleted",
+    "UpdateSuccessfull": "Update Successfull",
+    "SuccessfullyApproved": "Approve Changed.",
+    "SetTransactionStatus": "Transaction Status",
+
+    "Permission:Students": "Student Management",
+    "Permission:Students.Create": "Creating new students",
+    "Permission:Students.Edit": "Editing the students",
+    "Permission:Students.Delete": "Deleting the students",
+    "Permission:Students.Approve": "Approve the student",
+    "Menu:Students": "Students",
+    "Students": "Students",
+    "StudentDeletionConfirmationMessage": "Are you sure you want to delete the '{0}'?",
+    "ReSubmissionConfirmationMessage": "Are you sure you want to allow this student:{0} to resubmit?",
+    "QuestionDeletionConfirmationMessage": "Are you sure you want to delete the '{0}'?",
+    "ResultPublishConfirmationMessage": "Are you sure you want to change Result-Publish status for '{0}'?",
+    "ExamPublishConfirmationMessage": "Are you sure you want to change Exam-Publish  status for '{0}'?",
+    "StudentTransactionConfirmationMessage": "Do you wish to proceed and approve the transaction '{0}'?",
+    "EnrollmentDate": "Enrollment date",
+    "NewStudent": "New student",
+    "UpdateStudent": "Update Student",
+
+    "Enum:SevenToEleven": "Seven To Eleven",
+    "Enum:BelowSeven": "Below Seven",
+
+    "Enum:Pending": "Pending",
+    "Enum:Approved": "Approved",
+    "Enum:Rejected": "Rejected",
+
+    "Enum:QuestionType:null": "",
+    "Enum:QuestionType:0": "",
+    "Enum:QuestionType:1": "Multiple Choice",
+    "Enum:QuestionType:2": "Single Text",
+    "Enum:QuestionType:3": "Multi Text",
+    "Enum:QuestionType:4": "Image",
+    "Enum:QuestionType:5": "Media",
+
+    "Enum:Male": "Male",
+    "Enum:Female": "Female",
+
+    "Enum:Mother": "Mother",
+    "Enum:Father": "Father",
+    "Enum:Student": "Student",
+    "Enum:Siblings": "Siblings",
+
+    "Enum:MChoiceOptions:null": "",
+    "Enum:MChoiceOptions:0": "Unknown",
+    "Enum:MChoiceOptions:1": "Option A",
+    "Enum:MChoiceOptions:2": "Option B",
+    "Enum:MChoiceOptions:4": "Option C",
+    "Enum:MChoiceOptions:8": "Option D",
+    "Enum:MChoiceOptions:16": "Option E",
+
+    "Enum:DifficultyLevel:null": "",
+    "Enum:DifficultyLevel:0": "0",
+    "Enum:DifficultyLevel:1": "1",
+    "Enum:DifficultyLevel:2": "2",
+    "Enum:DifficultyLevel:3": "3",
+    "Enum:DifficultyLevel:4": "4",
+    "Enum:DifficultyLevel:5": "5",
+
+    "Enum:Subject:null": "",
+    "Enum:Subject:1": "Story",
+    "Enum:Subject:2": "Mathematics",
+    "Enum:Subject:3": "English",
+    "Enum:Subject:4": "WorkShop",
+    "Enum:Subject:5": "Other",
+
+    "Enum:StoryGroup:null": "",
+    "Enum:StoryGroup:0": "Unknown",
+    "Enum:StoryGroup:1": "The Detective Bear In A Museum",
+    "Enum:StoryGroup:2": "The Clever Fox Of The Royal Court",
+    "Enum:StoryGroup:3": "The Fat Elephant And The Croaky Bullfrog",
+    "Enum:StoryGroup:4": "The Epic Adventure Of Ants",
+    "Enum:StoryGroup:5": "Four Unpopular Friends And Their Brave Plan",
+
+    "Enum:Published:false": "Hidden",
+    "Enum:Published:true": "Published",
+
+    "Enum:ResultStatus:null": "Unknown",
+    "Enum:ResultStatus:0": "Unknown",
+    "Enum:ResultStatus:1": "Correct",
+    "Enum:ResultStatus:2": "Incorrect",
+    "Enum:ResultStatus:3": "UnderReview"
+
+  }
+}
+

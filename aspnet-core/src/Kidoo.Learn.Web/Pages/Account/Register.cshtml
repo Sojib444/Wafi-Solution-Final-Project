@@ -1,0 +1,304 @@
+﻿@page "/student-register"
+
+@using Kidoo.Learn.Enums;
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.Account.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Theming;
+@model Kidoo.Learn.Web.Account.RegisterModel
+@inject IThemeManager ThemeManager
+@inject IHtmlLocalizer<AccountResource> L
+@{
+    Layout = ThemeManager.CurrentTheme.GetAccountLayout();
+}
+<div class="login_box_main_wrapper custom-height" id="login_height">
+    <div class="container">
+        <div class="login-logo gap-top">
+          
+            <a href="/"> <img src="/images/index1-logo.png" width="250" alt="logo" /> <img src="/images/tarbiyah.png" width="250" alt="logo" /></a>
+            <h5 class="mt-4"><strong>তারবিয়াহ কিডো গল্পের আসর</strong></h5>
+            <p class="mt-4"><span style="color:#000; font-size:18px; line-height:30px;">আমাদের এই আয়োজনে থাকছে গল্পের ক্লাস এবং ওয়ার্কশপ যেখানে শিশুরা ইসলামের আলোকে নৈতিক শিক্ষা এবং মূল্যবোধ ছাড়াও শিখবে কমিউনিকেশন স্কিল, প্রেজেন্টেশন স্কিল, ক্রিটিক্যাল থিংকিং-সহ আরও অনেক সফট স্কিল! আরও থাকছে ক্রাফটিং, ছবি আঁকা, গল্প লেখা ইত্যাদি মজার কিছু অ্যাক্টিভিটি নিয়ে প্রতিযোগিতা।</span></p>
+        </div>
+<div class="signin-wrapper">
+    <div class="row">
+                <div class="col-lg-5 col-md-12 col-12 mt-3">
+                    <div class="">
+                        <h6 class="mb-3"><b>রেজিস্ট্রেশনের নিয়মাবলী:</b></h6>
+
+                        <ul>
+                            <li class="mb-2">🎈 নিবন্ধনকারী শিশুদের নারী অভিভাবক টেলিগ্রাম গ্ৰুপে মেম্বার হয়ে এই প্রতিযোগিতায় অংশগ্রহণ করতে পারবেন। রেজিস্ট্রেশন শেষে গ্ৰুপের লিংক পেয়ে যাবেন। </li>
+                            <li class="mb-2">🎈 <a class="text-primary" href="https://www.wafilife.com/cat/books/publisher/kidoo" target="_blank">কিডো স্টোরি সিরিজের</a> ৫ টি বই থেকে লাইভ সেশনের মাধ্যমে গল্পের আসর হবে। এছাড়া থাকবে ওয়ার্কশপ, কুইজ, ছবি আঁকা, ক্রাফটিং, সৃজনশীল প্রশ্ন ইত্যাদি কার্যক্রম।</li>
+                            <li class="mb-2">
+                                🎈 শিশুদের বয়সভেদে দুটো লেভেল থাকবে -<br />
+                                <p class="ml-1">ক) দল: ৭ থেকে ১১ বছর</p>
+                                <p class="ml-1">খ) দল: ৭ বছরের কম</p>
+
+                            </li>
+                            <li class="mb-2">🎈 দুটি দলেই থাকবে ১ম, ২য় এবং ৩য় পুরষ্কার। বিজয়ীরা পাবে সার্টিফিকেট। শুধু তাই না, নিয়মিত সবগুলো অ্যাক্টিভিটিতে অংশগ্রহণকারী প্রত্যেকেই পাবে ভার্চুয়াল সার্টিফিকেট।</li>
+                            <li class="mb-2">
+                                🎈 বিজয়ীরা ছাড়াও দুটি দল থেকে পরবর্তী সর্বোচ্চ নম্বরপ্রাপ্ত ১০ জন করে মোট ২০ জনের জন্য থাকবে আকর্ষণীয় পুরষ্কার!
+                            </li>
+                            <li class="mb-2">🎁 গিফট পার্টনার হিসেবে থাকবে: <a target="_blank" href="https://www.facebook.com/kidooofficial" class="text-primary">কিডো</a></li>
+                        </ul>
+                        <h6 class="mb-3"><b>সময়সূচি:</b></h6>
+                        <ul>
+                            <li class="mb-2">📝 নিবন্ধন শুরু: ২ ডিসেম্বর, ২০২৩</li>
+                            <li class="mb-2">🔴 নিবন্ধনের শেষ তারিখ: ১৬ ডিসেম্বর, ২০২৩</li>
+                            <li class="mb-2">📅 গল্পের আসর শুরু : ১৭ ডিসেম্বর, ২০২৩</li>
+                        </ul>
+
+                        <h6 class="mb-3"><b>গল্পের আসরের নিয়মাবলী:</b></h6>
+                        <ul>
+                            <li class="mb-2">📝 নিবন্ধন ফি বিকাশ অথবা নগদ একাউন্টে পাঠানোর পর নিবন্ধনের জন্য Trx ID সংরক্ষণ করুন।</li>
+                            <li class="mb-2">📝 কিডো ওয়েবসাইট থেকে ফর্ম পূরণের মাধ্যমে নিবন্ধন সম্পন্ন করুন।</li>
+                            <li class="mb-2">📝 নিবন্ধন করামাত্র একটি কুপন দেওয়া হবে, যা ব্যবহার করে wafilife.com থেকে কিডো সিরিজটি বিশেষ ছাড়ে ক্রয় করা যাবে। প্রবাসীরা pdf ক্রয় করতে পারবেন।</li>
+                            <li class="mb-2">📝 নিবন্ধনকারীদের টেলিগ্রাম গ্রুপের লিংক দেওয়া হবে যেখানে পুরো কার্যক্রম আয়োজিত হবে ইনশাআল্লাহ। নারী অভিভাবক ছাড়া অন্য কাউকে গ্রুপে অ্যাড করা হবে না।</li>
+                            <li class="mb-2">📝 নিবন্ধন ফি: ৩০০ টাকা।</li>
+                            <li class="mb-2">📝 বিকাশ/নগদ: 01859564315 (সেন্ড মানি)</li>
+                        </ul>
+                        <p class="mt-4">
+                            <span style="color:#000; font-size:16px; line-height:30px;">
+                                তারবিয়াহ <b>শুধুমাত্র মায়েদের জন্য</b> মুসলিম শিশু প্রতিপালন সম্পর্কিত একটি অনলাইন প্লাটফর্ম।<br />
+                                <a target="_blank" href="https://t.me/+o2G4ARyoYj44ZWFl">তারবিয়াহ টেলিগ্রাম গ্রুপ</a> : <a class="text-primary" target="_blank" href="https://t.me/+o2G4ARyoYj44ZWFl">জয়েন করতে ক্লিক করুন</a>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-12 col-12 mb-6">
+            <div class="left-side">
+                <form method="post">
+                    <div class="left-side">
+                                <h4>
+                                    ধাপ ১ - পেমেন্ট:
+                                </h4>
+                                <p class="mb-3">বিকাশ/নগদ এ (01859564315) ৩০০ টাকা সেন্ড মানি করে ট্রানজেকশন আইডি প্রদান করুন</p>
+                    </div>
+                            <div class="form-group field-icon row mb-3">
+                                <div class="col-md-12">
+                                    <label>ট্রানজেকশন আইডি</label>
+                                    <input type="text" asp-for="Input.TransactionId" auto-focus="true" placeholder="" />
+                                    <span><i class="fa fa-money" aria-hidden="true"></i></span>
+                                </div>
+                                <span asp-validation-for="Input.TransactionId" class="text-danger"></span>
+                            </div>
+
+                            <div class="left-side">
+                                <h4>
+                                    ধাপ ২ - রেজিস্ট্রেশন:
+                                </h4>
+                                <p class="mb-3">নিচের তথ্যগুলো প্রদান করে রেজিস্ট্রেশন সম্পন্ন করুন।</p>
+                            </div>
+                            <div class="form-group field-icon row mb-3">
+                                <div class="select-field">
+
+                                    <label>শিক্ষার্থীর বয়স গ্ৰুপ</label>
+                                    <select asp-for="Input.AgeGroup">
+                                        <option value="" disabled selected>লেভেল নির্বাচন করুন</option>
+                                        <option value="1">
+                                            ৭ থেকে ১১ বছর (ক দল)
+                                        </option>
+                                        <option value="2">
+                                            ৭ বছরের কম (খ দল)
+                                        </option>
+                                     </select>
+                                    <span><i class="fa fa-child" aria-hidden="true"></i></span>
+                                    
+                                </div>
+                                <span asp-validation-for="Input.AgeGroup" class="text-danger"></span>
+                            </div>
+                            <div class="form-group field-icon row mb-3">
+                                <div class="col-md-12">
+
+                                    <label>অভিভাবকের নাম</label>
+                                    <input type="text" asp-for="Input.GuardianName" auto-focus="true" placeholder="" />
+                                    <span><i class="fa fa-user" aria-hidden="true"></i></span>
+                                    
+                                </div>
+                                <span asp-validation-for="Input.GuardianName" class="text-danger"></span>
+                            </div>
+                    <div class="form-group field-icon row mb-3">
+                                <div class="col-md-12 select-field field-icon">
+
+                                    <label>জেলা</label>
+                                    <select asp-for="Input.District">
+                                        <option value="" disabled selected>জেলা নির্বাচন করুন</option>
+                                        @foreach (var district in Enum.GetValues(typeof(District)))
+                                        {
+                                            <option value="@district">@district</option>
+                                        }
+                                    </select>
+                                    <span><i class="fa fa-home" aria-hidden="true"></i></span>
+                                </div>
+                    </div>
+                            
+                    <div class="form-group field-icon row mb-3">
+                                <div class="col-lg-6 col-md-12 field-icon">
+                                    
+                                    <label>শিক্ষার্থীর নামের প্রথম অংশ</label>
+                                    <input type="text" asp-for="Input.FirstName" auto-focus="true" placeholder="" />
+                                    <span><i class="fa fa-child" aria-hidden="true"></i></span>
+                                    <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                                    </div>
+                                
+                                <div class="col-lg-6 col-md-12 field-icon">
+                                    <label>শিক্ষার্থীর নামের শেষ অংশ</label>
+                                    <input type="text" asp-for="Input.LastName" auto-focus="true" placeholder="" />
+                                    <span><i class="fa fa-child" aria-hidden="true"></i></span>
+                                    <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                                </div>
+                                
+                                
+                            </div>
+                            <div class="form-group field-icon row mb-3">
+                                <div class="col-md-12">
+                                    <label>শিক্ষা প্রতিষ্ঠানের নাম</label>
+                                    <input type="text" asp-for="Input.Institution" auto-focus="true" placeholder="" />
+                                    <span><i class="fa fa-building" aria-hidden="true"></i></span>
+                                </div>
+                                <span asp-validation-for="Input.Institution" class="text-danger"></span>
+                            </div>
+
+
+
+                            <div class="form-group field-icon row mb-3 field-icon">
+                                <div class="col-lg-6 col-md-12 select-field">
+                                    <label>লিঙ্গ</label>
+                            <select asp-for="Input.Gender">
+                                        <option value="" disabled selected>লিঙ্গ নির্বাচন করুন</option>
+                                @foreach (var gen in Enum.GetValues(typeof(Gender)))
+                                {
+                                    <option value="@gen">@gen</option>
+                                }
+                            </select>
+                                <span><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
+                                        <span asp-validation-for="Input.Gender" class="text-danger"></span>
+                                    
+                        </div>
+                                <div class="col-lg-6 col-md-12 field-icon">
+                                    <label>শ্রেণি</label>
+                                    <input type="text" asp-for="Input.Class" auto-focus="true" placeholder="" />
+                                    <span><i class="fa fa-book" aria-hidden="true"></i></span>
+                                    
+                                    <span asp-validation-for="Input.Class" class="text-danger"></span>
+                                </div>
+                    </div>
+                    
+
+                    <div class="form-group field-icon row mb-3">
+                        <div class="select-field">
+                            <label>এই আয়োজন সম্পর্কে কিভাবে জানতে পেরেছেন?</label>
+                            <select asp-for="Input.Referral">
+                                <option value="">একটি রেফারাল সিলেক্ট করুন</option>
+                                @foreach (var refer in Enum.GetValues(typeof(Referral)))
+                                {
+                                    <option value="@refer">@refer</option>
+                                }
+                            </select>
+                                <span><i class="fa fa-link" aria-hidden="true"></i></span>
+                                
+                                <span asp-validation-for="Input.Referral" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                            <div class="left-side">
+                                <h4>
+                                    ধাপ ৩ - কিডো একাউন্ট:
+                                </h4>
+                                <p class="mb-3">আপনার মোবাইল নম্বর (অথবা ইমেইল এড্রেস) এবং পাসওয়ার্ড প্রদান করে কিডো একাউন্ট তৈরী করুন। পরীক্ষায় অংশগ্রহণের জন্য এই তথ্যগুলো প্রয়োজন হবে। </p>
+                            </div>
+                    <div class="form-group field-icon row mb-3">
+                                <div class="col-lg-6 col-md-12 field-icon">
+                                    <label>মোবাইল নম্বর</label>
+                                    <input type="text" asp-for="Input.PhoneNumber" auto-focus="true" placeholder="" />
+                                    <span><i class="fa fa-phone" aria-hidden="true"></i></span>
+                                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                                </div>
+                                <div class="col-lg-6 col-md-12 field-icon">
+                                    <label>ইমেল</label>
+                                    <input type="text" asp-for="Input.EmailAddress" auto-focus="true" placeholder="" />
+                                    <span><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                    <span asp-validation-for="Input.EmailAddress" class="text-danger"></span>
+                                </div>
+                    </div>
+                   
+
+                    <div class="form-group field-icon row mb-3">
+                        <div class="col-md-12">
+                                    <label>পাসওয়ার্ড</label>
+                            <input type="password" asp-for="Input.Password" auto-focus="true" placeholder="" />
+                            <span><i class="fa fa-unlock-alt" aria-hidden="true"></i></span>
+                        </div>
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    
+
+
+                    <div class="cond">
+                        <input type="checkbox" id="box1" name="box1" value="box1">
+                                <label for="box1"> অভিভাবক হিসেবে প্রতিযোগিতার নিয়মাবলী ভালোভাবে পড়ে সিদ্ধান্ত নিয়েছি </label>
+                    </div>
+
+
+                            <div class="login-btn-sec">
+                                <abp-button button-type="Primary" class="sub-btn" type="submit"><span>@L["Register"]</span></abp-button>
+
+                        <p class="ml-3">
+                                    রেজিস্ট্রেশন করে থাকলে <a href="@Url.Page("./Login", new {returnUrl = Model.ReturnUrl, returnUrlHash = Model.ReturnUrlHash})" class="text-primary">লগইন</a> করুন
+                            
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+</div>
+    </div>
+</div>
+
+@* <div class="card mt-3 shadow-sm rounded">
+    <div class="card-body p-5">
+        <h4>@L["Register"]</h4>
+        <strong>
+            @L["AlreadyRegistered"]
+            <a href="@Url.Page("./Login", new {returnUrl = Model.ReturnUrl, returnUrlHash = Model.ReturnUrlHash})" class="text-decoration-none">@L["Login"]</a>
+        </strong>
+        <form method="post" class="mt-4">
+            @if (Model.EnableLocalRegister || Model.IsExternalLogin)
+            {
+                <abp-input asp-for="Input.UserName" auto-focus="true"/>
+            }
+
+            @if(Model.EnableLocalRegister || Model.IsExternalLogin)
+            {
+                 <abp-input asp-for="Input.EmailAddress"/>
+            }
+
+            @if (!Model.IsExternalLogin && Model.EnableLocalRegister)
+            {
+                <abp-input asp-for="Input.Password"/>
+            }
+
+            @if(Model.EnableLocalRegister || Model.IsExternalLogin)
+            {
+                 <div class="d-grid gap-2">
+                     <abp-button button-type="Primary" type="submit" class="btn-lg mt-4">@L["Register"]</abp-button>
+                 </div>
+            }
+
+        </form>
+
+        @if (!Model.IsExternalLogin && Model.VisibleExternalProviders.Any())
+        {
+            <div class="mt-2">
+                <h5>@L["OrRegisterWith"]</h5>
+                <form asp-page="./Login" asp-page-handler="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" asp-route-returnUrlHash="@Model.ReturnUrlHash" method="post">
+                    @foreach (var provider in Model.VisibleExternalProviders)
+                    {
+                        <button type="submit" class="btn btn-primary m-1" name="provider" value="@provider.AuthenticationScheme" title="@L["RegisterUsingYourProviderAccount", provider.DisplayName]">@provider.DisplayName</button>
+            }
+                </form>
+            </div>
+        }
+
+    </div>
+</div> *@

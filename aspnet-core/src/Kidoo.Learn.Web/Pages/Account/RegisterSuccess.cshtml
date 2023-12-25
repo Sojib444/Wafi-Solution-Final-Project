@@ -1,0 +1,159 @@
+﻿@page "/register-success"
+@using Kidoo.Learn.Enums;
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.Account.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Theming;
+@model Kidoo.Learn.Web.Account.RegisterSuccessModel
+@inject IThemeManager ThemeManager
+@inject IHtmlLocalizer<AccountResource> L
+@{
+    Layout = ThemeManager.CurrentTheme.GetAccountLayout();
+}
+<div class="login_box_main_wrapper custom-height" id="login_height">
+    <div class="container">
+        <div class="login-logo gap-top">
+
+            <a href="/"> <img src="/images/index1-logo.png" width="250" alt="logo"> </a>
+            <img src="/images/tarbiyah.png" width="250" alt="logo">
+            <h4 class="mt-4">আপনার রেজিস্ট্রেশন সফলভাবে সম্পন্ন হয়েছে</h4>
+            <p>আমাদের সাথে থাকতে ফেসবুক পেজে লাইক দিয়ে রাখুন - <a href="https://www.facebook.com/kidooofficial" target="_blank">https://www.facebook.com/kidooofficial</a> </p>
+            <h6 class="mt-3">
+                তারবিয়াহ - কিডো গল্পের আসর সম্পূর্ণ প্রোগ্রামটি টেলিগ্রাম গ্ৰুপ থেকে পরিচালিত হবে। শুধুমাত্র নারী অভিভাবকগণ এই গ্ৰুপে জয়েন করতে পারবেন।
+            </h6>
+            <div class="client-say-wrapper">
+                <div class="heading-text" style="max-width:100%">
+                    <a class="custom-btn" target="_blank" href="https://t.me/+IYqv8RYM7E5mMGJl" style="width:300px"> <span>টেলিগ্রাম গ্ৰুপে জয়েন করতে ক্লিক করুন</span> </a>
+                </div>
+                
+            </div>
+            
+        </div>
+<div class="signin-wrapper">
+    <div class="row">
+        <div class="col-md-12 col-12">
+                    <div class="alert-box wow fadeInRight">
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            <span class="alert-icon"><i class="fas fa-bullhorn bullhorn-color"></i></span>
+                            ওয়াফিলাইফে <a href="https://www.wafilife.com/cat/books/publisher/kidoo" target="_blank">কিডো গল্পের সিরিজ</a> ২৫% ছাড়ে কিনতে এই প্রমোকোড ব্যবহার করুন: <span class="text-primary">TARBIYAH05</span>
+                            এই কুপন ব্যবহার করে কিডোর অন্যান্য বইও কিনতে পারবেন।
+                        </div>
+                    </div>
+                    <div class="alert-section-1  wow fadeInUp">
+                        <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                            <p>
+                                <span class="alert-icon"><i class="fas fa-check check-color"></i></span> <span>
+                                    মূল প্রতিযোগিতায় অংশগ্রহণ করার সময় লগইন করতে মোবাইল নম্বর, ইমেইল এবং পাসওয়ার্ড সংরক্ষণ করুন <br />
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            @if (Model.Input != null)
+            {
+                <div class="float_left">
+                    <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="home1-section-heading1" style="text-align:left">
+                                <h6>এক নজরে আপনার তথ্য</h6>
+                            </div>
+                            <div class="mobile-text float_left">
+                                <ul>
+                                    <li> > &nbsp; Student Name: @Model.Input.FirstName @Model.Input.LastName</li>
+                                    <li> > &nbsp; Username: @Model.Input.UserName</li>
+                                    <li> > &nbsp; Email Address: @Model.Input.EmailAddress</li>
+                                    <li> > &nbsp; Password: <i>Use the registrion password for login</i></li>
+                                </ul>
+                            </div>
+     
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+
+            <div class="download-mobile-wrapper float_left">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="home1-section-heading1">
+                                <h4><span class="alert-icon"><i class="fas fa-bullhorn bullhorn-color"></i></span>
+                                    আপনার অবগতির জন্য বলছি
+                                </h4>
+                            </div>
+                            <div class="button6-wrapper mobile-text float_left">
+                                <h4>কিডোর আরেকটি বই FUN CROSSWORD PUZZLES FOR KIDS নিয়ে আমরা বাচ্চাদের ইংরেজি শব্দ শেখার আরেকটি প্রতিযোগিতা শীঘ্রই ঘোষণা হবে। ওয়াফিলাইফে এই কুপন কোড TARBIYAH05 দিয়ে অর্ডার করে ২৫% ছাড়ে আপনি আপনি ক্রসওয়ার্ড বইটি সংগ্রহ করে রাখতে পারেন। </h4>
+                                <br />
+                                <a href="https://www.wafilife.com/cat/books/publisher/kidoo" target="_blank" class="instagram btn6"> ওয়াফিলাইফে অর্ডার করতে ক্লিক করুন </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="mobile-img float_left">
+                                <div class="portfolio_img_overlay overlay-color">
+                                    <div class="portfolio_img_text">
+                                        <a href="images/crossword-ad.jpg" title="CrossWord Book" class="img-link">
+                                            <img src="images/crossword-ad.jpg" alt="CrossWord Book" width="400">
+                                        </a>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+    </div>
+</div>
+
+@* <div class="card mt-3 shadow-sm rounded">
+    <div class="card-body p-5">
+        <h4>@L["Register"]</h4>
+        <strong>
+            @L["AlreadyRegistered"]
+            <a href="@Url.Page("./Login", new {returnUrl = Model.ReturnUrl, returnUrlHash = Model.ReturnUrlHash})" class="text-decoration-none">@L["Login"]</a>
+        </strong>
+        <form method="post" class="mt-4">
+            @if (Model.EnableLocalRegister || Model.IsExternalLogin)
+            {
+                <abp-input asp-for="Input.UserName" auto-focus="true"/>
+            }
+
+            @if(Model.EnableLocalRegister || Model.IsExternalLogin)
+            {
+                 <abp-input asp-for="Input.EmailAddress"/>
+            }
+
+            @if (!Model.IsExternalLogin && Model.EnableLocalRegister)
+            {
+                <abp-input asp-for="Input.Password"/>
+            }
+
+            @if(Model.EnableLocalRegister || Model.IsExternalLogin)
+            {
+                 <div class="d-grid gap-2">
+                     <abp-button button-type="Primary" type="submit" class="btn-lg mt-4">@L["Register"]</abp-button>
+                 </div>
+            }
+
+        </form>
+
+        @if (!Model.IsExternalLogin && Model.VisibleExternalProviders.Any())
+        {
+            <div class="mt-2">
+                <h5>@L["OrRegisterWith"]</h5>
+                <form asp-page="./Login" asp-page-handler="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" asp-route-returnUrlHash="@Model.ReturnUrlHash" method="post">
+                    @foreach (var provider in Model.VisibleExternalProviders)
+                    {
+                        <button type="submit" class="btn btn-primary m-1" name="provider" value="@provider.AuthenticationScheme" title="@L["RegisterUsingYourProviderAccount", provider.DisplayName]">@provider.DisplayName</button>
+            }
+                </form>
+            </div>
+        }
+
+    </div>
+</div> *@

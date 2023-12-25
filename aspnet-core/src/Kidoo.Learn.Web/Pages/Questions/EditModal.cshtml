@@ -1,0 +1,127 @@
+﻿@page
+@using Kidoo.Learn.Enums;
+@using Kidoo.Learn.Localization
+@using Kidoo.Learn.Permissions
+@using Kidoo.Learn.Questions.Dtos;
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.Extensions.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal;
+@inject IStringLocalizer<LearnResource> L
+@inject IAuthorizationService AuthorizationService
+@model Kidoo.Learn.Web.Pages.Questions.EditModal
+@{
+    Layout = null;
+    <abp-script src="/Pages/Questions/EditModal.js" />
+}
+
+<form method="post" action="@Url.Page("/Questions/EditModal")">
+    <abp-modal scrollable="true" size="Large">
+        <abp-modal-header title="Updating Question..."></abp-modal-header>
+        <abp-modal-body>
+            <abp-input asp-for="Id" />
+            <div class="form-group">
+                <label>Title</label>
+                <input asp-for="EditQuestionDto.Title" class="form-control" />
+            </div>
+            <span asp-validation-for="EditQuestionDto.Title" class="text-danger"></span>
+
+            <div class="form-group">
+                <label>Subject</label>
+                <select asp-for="EditQuestionDto.Subject" class="form-control">
+                    @foreach (var item in Html.GetEnumSelectList<Subject>())
+                    {
+                        <option value="@item.Value">@L[item.Text]</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Story Group</label>
+                <select asp-for="EditQuestionDto.StoryGroup" class="form-control">
+                    <option value="">@L["Select A Story Group"]</option>
+                    @foreach (var item in Html.GetEnumSelectList<StoryGroup>())
+                    {
+                        <option value="@item.Value">@L[$"Enum:StoryGroup:{item.Value}"]</option>
+                    }
+                </select>
+            </div>
+
+            <span asp-validation-for="EditQuestionDto.Subject" class="text-danger"></span>
+
+            <div class="form-group">
+                <label>Description</label>
+                <textarea asp-for="EditQuestionDto.Description" class="form-control"></textarea>
+            </div>
+            <span asp-validation-for="EditQuestionDto.Description" class="text-danger"></span>
+
+            <div class="form-group">
+                <label>Difficulty Level</label>
+                <select asp-for="EditQuestionDto.DifficultyLevel" class="form-control">
+                    @foreach (var item in Html.GetEnumSelectList<DifficultyLevel>())
+                    {
+                        <option value="@item.Value">@L[$"Enum:DifficultyLevel:{item.Value}"]</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Question Type</label>
+                <select asp-for="EditQuestionDto.QuestionType" class="form-control">
+                    @foreach (var item in Html.GetEnumSelectList<QuestionType>())
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+            </div>
+
+
+            @if (Model.QuestionOptionDto.Count > 1)
+            {
+                <div id="multipleChoiceOptions">
+                    <label>Multiple Choice</label>
+                    <abp-container abp-border="Default" abp-rounded="Default">
+                        <input asp-for="QuestionOptionDto[0].Id" hidden />
+                        <input asp-for="QuestionOptionDto[0].Options" hidden />
+                        <label>Option A</label>
+                        <input asp-for="QuestionOptionDto[0].OptionText" class="form-control" />
+
+                        <input asp-for="QuestionOptionDto[1].Id" hidden />
+                        <input asp-for="QuestionOptionDto[1].Options" hidden />
+                        <label>Option B</label>
+                        <input asp-for="QuestionOptionDto[1].OptionText" class="form-control" />
+
+                        <input asp-for="QuestionOptionDto[2].Id" hidden />
+                        <input asp-for="QuestionOptionDto[2].Options" hidden />
+                        <label>Option C</label>
+                        <input asp-for="QuestionOptionDto[2].OptionText" class="form-control" />
+
+                        <input asp-for="QuestionOptionDto[3].Id" hidden />
+                        <input asp-for="QuestionOptionDto[3].Options" hidden />
+                        <label>Option D</label>
+                        <input asp-for="QuestionOptionDto[3].OptionText" class="form-control" />
+
+                        <label>Multiple-Choice Answer</label>
+                        <select asp-for="EditQuestionDto.MultipleChoiceCurrectAnswer" class="form-control">
+                            <option value="">@L["Select an option"]</option>
+                            @foreach (var item in Html.GetEnumSelectList<Options>())
+                            {
+                                <option value="@item.Value">@L[item.Text]</option>
+                            }
+                        </select>
+                        <br />
+                    </abp-container>
+                </div>
+
+            }
+
+
+            <div class="form-group">
+                <label>Correct Text Answer</label>
+                <input asp-for="EditQuestionDto.CorrectAnswer" class="form-control" />
+            </div>
+            <span asp-validation-for="EditQuestionDto.CorrectAnswer" class="text-danger"></span>
+
+        </abp-modal-body>
+        <abp-modal-footer buttons="@AbpModalButtons.Save | @AbpModalButtons.Cancel"></abp-modal-footer>
+    </abp-modal>
+</form>

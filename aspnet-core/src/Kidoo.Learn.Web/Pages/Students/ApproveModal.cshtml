@@ -1,0 +1,49 @@
+﻿@page
+@using Kidoo.Learn.Enums;
+@using Kidoo.Learn.Localization
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.Extensions.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@inject IStringLocalizer<LearnResource> L
+@inject IAuthorizationService AuthorizationService
+@model Kidoo.Learn.Web.Pages.Students.ApproveModal
+@{
+    Layout = null;
+}
+<form method="post" action="@Url.Page("/Students/ApproveModal")">
+    <abp-modal>
+        <abp-modal-header title="Select Payment Status"></abp-modal-header>
+        <abp-modal-body>
+            <abp-input asp-for="Id" />
+
+            <div class="form-group field-icon row mb-3">
+                <div class="select-field">
+                    <select asp-for="PaymentStatus">
+                        <option value="1">@L["Enum:Pending"].Value</option>
+                        <option value="2">@L["Enum:Approved"].Value</option>
+                        <option value="3">@L["Enum:Rejected"].Value</option>
+                    </select>
+                </div>
+                <span asp-validation-for="PaymentStatus" class="text-danger"></span>
+            </div>
+        </abp-modal-body>
+        <abp-modal-footer buttons="@AbpModalButtons.Save | @AbpModalButtons.Cancel"></abp-modal-footer>
+    </abp-modal>
+</form>
+
+<style>
+    .modal-content {
+        position: center;
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+        color: var(--bs-modal-color);
+        pointer-events: auto;
+        background-color: var(--bs-modal-bg);
+        background-clip: padding-box;
+        border: var(--bs-modal-border-width) solid var(--bs-modal-border-color);
+        border-radius: var(--bs-modal-border-radius);
+        box-shadow: var(--bs-modal-box-shadow);
+        outline: 0;
+    }
+</style>

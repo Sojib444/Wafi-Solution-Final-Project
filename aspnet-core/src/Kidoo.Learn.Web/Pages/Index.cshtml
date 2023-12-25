@@ -1,0 +1,189 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Theming;
+@using Kidoo.Learn.Localization
+@using Volo.Abp.Users
+@model Kidoo.Learn.Web.Pages.IndexModel
+@inject IThemeManager ThemeManager
+@inject IHtmlLocalizer<LearnResource> L
+@inject ICurrentUser CurrentUser
+@{
+    Layout = "/Themes/LeptonXlite/Layouts/Public.cshtml";
+    //Layout = ThemeManager.CurrentTheme.GetPublicLayout();
+}
+@section styles {
+    <abp-style src="/Pages/Index.css" />
+}
+@section scripts {
+    <abp-script src="/Pages/Index.js" />
+}
+
+
+<!-- banner section start start-->
+<div class="index2-slider-wrapper ps-rel" style="background-color:#fff">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-11  m-3">
+                <div class="slider-caption">
+                    <h4><b>Welcome to Kidoo Learning</b></h4>
+
+                </div>
+                <div class="slider-form float_left">
+                    <a class="search-btn" href="/account/login">
+                        Login
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 col-12">
+                <div class="index2-slider-img">
+                    <img src="images/dashboard/slider-img.png" alt="img">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card col-lg-4 col-12">
+                <div class="card-body">
+                    <img src="images/dashboard/ICT.png" alt="img" style="width: 100%">
+                </div>
+                <h5 class="text-center">
+                    ICT for Kids
+                </h5>
+                <p class="text-center" style=" color: #b61984">
+                    coming soon
+                </p>
+                <br />
+            </div>
+            <div class="card col-lg-4 col-12">
+                <div class="card-body">
+                    <img src="images/dashboard/Math.png" alt="img" style="width: 100%">
+                </div>
+                <h5 class="text-center">
+                    Maths for Kids
+                </h5>
+                <p class="text-center" style=" color: #b61984">
+                    coming soon
+                </p>
+                <br />
+            </div>
+            <div class="card col-lg-4 col-12">
+                <div class="card-body">
+                    <img src="images/dashboard/Programming.png" alt="img" style="width: 100%">
+                </div>
+                <h5 class="text-center">
+                    Programming for Kids
+                </h5>
+                <p class="text-center" style=" color: #b61984">
+                    coming soon
+                </p>
+                <br />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@* <!-- banner section start start-->
+<div class="index2-slider-wrapper ps-rel" style="background-color:#fff">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <div class="slider-caption">
+                    <h4><b>তারবিয়াহ কিডো গল্পের আসর</b></h4>
+                    <p class="mt-4">
+                        <span style="color:#000; font-size:16px; line-height:30px;">
+                            ছুটির আনন্দ বাড়িয়ে দিতে আসছে নতুন চমক! প্রথম, দ্বিতীয়, তৃতীয় ছাড়াও থাকছে ২০ টির বেশি পুরস্কার। <br /><br />
+                            ডিসেম্বরের ছুটিতে আমরা আয়োজন করতে যাচ্ছি শিশুদের জন্য দারুণ একটি আয়োজন!<br /><br />
+
+                            আমাদের এই আয়োজনে থাকছে গল্পের ক্লাস এবং ওয়ার্কশপ যেখানে শিশুরা ইসলামের আলোকে নৈতিক শিক্ষা এবং মূল্যবোধ ছাড়াও শিখবে কমিউনিকেশন স্কিল, প্রেজেন্টেশন স্কিল, ক্রিটিক্যাল থিংকিং-সহ আরও অনেক সফট স্কিল! আরও থাকছে ক্রাফটিং, ছবি আঁকা, গল্প লেখা ইত্যাদি মজার কিছু অ্যাক্টিভিটি নিয়ে প্রতিযোগিতা।
+                        </span>
+                    </p>
+                </div>
+                <div class="slider-form mt-4 float_left">
+                    <a class="search-btn" href="/student-register">
+                        Register Now
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 col-12">
+                <div class="index2-slider-img">
+                    <img src="images/index2/workshop.jpg" alt="img">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ *@
+
+
+@* <div class="download-mobile-wrapper float_left">
+    <div class="container">
+        <div class="row">
+            <div class="md-12">
+                <h6 class="mb-3"><b>গল্পের আসরের নিয়মাবলী:</b></h6>
+
+                <ul>
+                    <li class="mb-2">🎈 নিবন্ধনকারী শিশুদের নারী অভিভাবক টেলিগ্রাম গ্ৰুপে মেম্বার হয়ে এই প্রতিযোগিতায় অংশগ্রহণ করতে পারবেন। রেজিস্ট্রেশন শেষে গ্ৰুপের লিংক পেয়ে যাবেন। </li>
+                    <li class="mb-2">🎈 <a class="text-primary" href="https://www.wafilife.com/cat/books/publisher/kidoo" target="_blank">কিডো স্টোরি সিরিজের</a> ৫ টি বই থেকে লাইভ সেশনের মাধ্যমে গল্পের আসর হবে। এছাড়া থাকবে ওয়ার্কশপ, কুইজ, ছবি আঁকা, ক্রাফটিং, সৃজনশীল প্রশ্ন ইত্যাদি কার্যক্রম।</li>
+                    <li class="mb-2">
+                        🎈 শিশুদের বয়সভেদে দুটো লেভেল থাকবে -<br />
+                        <p class="ml-1">ক) দল: ৭ থেকে ১১ বছর</p>
+                        <p class="ml-1">খ) দল: ৭ বছরের কম</p>
+
+                    </li>
+                    <li class="mb-2">🎈 দুটি দলেই থাকবে ১ম, ২য় এবং ৩য় পুরষ্কার। বিজয়ীরা পাবে সার্টিফিকেট। শুধু তাই না, নিয়মিত সবগুলো অ্যাক্টিভিটিতে অংশগ্রহণকারী প্রত্যেকেই পাবে ভার্চুয়াল সার্টিফিকেট।</li>
+                    <li class="mb-2">
+                        🎈 বিজয়ীরা ছাড়াও দুটি দল থেকে পরবর্তী সর্বোচ্চ নম্বরপ্রাপ্ত ১০ জন করে মোট ২০ জনের জন্য থাকবে আকর্ষণীয় পুরষ্কার!
+                    </li>
+                    <li class="mb-2">🎁 গিফট পার্টনার হিসেবে থাকবে: <a target="_blank" href="https://www.facebook.com/kidooofficial" class="text-primary">কিডো</a></li>
+                </ul>
+                <h6 class="mb-3"><b>সময়সূচি:</b></h6>
+                <ul>
+                    <li class="mb-2">📝 নিবন্ধন শুরু: ২ ডিসেম্বর, ২০২৩</li>
+                    <li class="mb-2">🔴 নিবন্ধনের শেষ তারিখ: ১৬ ডিসেম্বর, ২০২৩</li>
+                    <li class="mb-2">📅 গল্পের আসর শুরু : ১৭ ডিসেম্বর, ২০২৩</li>
+                </ul>
+
+                <h6 class="mb-3"><b>যেভাবে নিবন্ধন করবেন:</b></h6>
+                <ul>
+                    <li class="mb-2">📝 নিবন্ধন ফি বিকাশ অথবা নগদ একাউন্টে পাঠানোর পর নিবন্ধনের জন্য Trx ID সংরক্ষণ করুন।</li>
+                    <li class="mb-2">📝 কিডো ওয়েবসাইট থেকে ফর্ম পূরণের মাধ্যমে নিবন্ধন সম্পন্ন করুন।</li>
+                    <li class="mb-2">📝 নিবন্ধন করামাত্র একটি কুপন দেওয়া হবে, যা ব্যবহার করে wafilife.com থেকে কিডো সিরিজটি বিশেষ ছাড়ে ক্রয় করা যাবে। প্রবাসীরা pdf ক্রয় করতে পারবেন।</li>
+                    <li class="mb-2">📝 নিবন্ধনকারীদের টেলিগ্রাম গ্রুপের লিংক দেওয়া হবে যেখানে পুরো কার্যক্রম আয়োজিত হবে ইনশাআল্লাহ। নারী অভিভাবক ছাড়া অন্য কাউকে গ্রুপে অ্যাড করা হবে না।</li>
+                    <li class="mb-2">📝 নিবন্ধন ফি: ৩০০ টাকা।</li>
+                    <li class="mb-2">📝 বিকাশ/নগদ: 01859564315 (সেন্ড মানি)</li>
+                </ul>
+                <p class="mt-4">
+                    <span style="color:#000; font-size:16px; line-height:30px;">
+                        তারবিয়াহ <b>শুধুমাত্র মায়েদের জন্য</b> মুসলিম শিশু প্রতিপালন সম্পর্কিত একটি অনলাইন প্লাটফর্ম।<br />
+                        <a target="_blank" href="https://t.me/+o2G4ARyoYj44ZWFl">তারবিয়াহ টেলিগ্রাম গ্রুপ</a> : <a class="text-primary" target="_blank" href="https://t.me/+o2G4ARyoYj44ZWFl">জয়েন করতে ক্লিক করুন</a>
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+ *@
+
+@*  <div class="container">
+    <div class="p-5 text-center">
+        <div class="d-inline-block bg-success text-white p-1 h5 rounded mb-4 " role="alert">
+            <h5 class="m-1"> <i class="fas fa-rocket"></i> Congratulations, <strong>Learn</strong> is successfully running!</h5>
+        </div>
+        <h1>Welcome to the Application</h1>
+
+        <p class="lead px-lg-5 mx-lg-5">@L["LongWelcomeMessage"]</p>
+
+        @if (!CurrentUser.IsAuthenticated)
+        {
+            <a abp-button="Primary" href="~/Account/Login"><i class="fa fa-sign-in"></i> @L["Login"]</a>
+        }
+        <iframe src="https://puzzel.org/en/crossword/embed?p=-NfZlpEZv4MUTjBc9GgN" title="Crossword" width="100%" height="900">
+        </iframe>
+        <iframe src="https://puzzel.org/en/jigsaw/embed?p=-NfZjN67Pw_-E_njo-E6" title="Crossword" width="100%" height="900">
+        </iframe>
+    </div>
+</div>  *@
