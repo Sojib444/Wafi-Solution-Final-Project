@@ -1,15 +1,9 @@
-﻿using Kidoo.Learn.CourseSections;
-using Kidoo.Learn.CourseTopics;
-using Kidoo.Learn.DomainDtos.CourseSections;
+﻿using Kidoo.Learn.DomainDtos.CourseSections;
 using Kidoo.Learn.DomainDtos.CourseTopics;
-using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using Volo.Abp;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
@@ -69,7 +63,7 @@ namespace Kidoo.Learn.Courses
             course.AddTopic(
                 GuidGenerator.Create(),
                 courseTopicDomainDto.Title,
-                courseTopicDomainDto.VideoDurationInMinutes, 
+                courseTopicDomainDto.VideoDurationInMinutes,
                 courseTopicDomainDto.VideoUrl,
                 sectionId,
                 courseTopicDomainDto.ThumbnailUrl

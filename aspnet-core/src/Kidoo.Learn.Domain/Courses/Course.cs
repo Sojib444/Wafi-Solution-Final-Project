@@ -1,15 +1,8 @@
 ﻿using Kidoo.Learn.CourseSections;
-using Kidoo.Learn.DomainDtos.CourseSections;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Volo.Abp;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Entities.Auditing;
 
@@ -25,7 +18,7 @@ namespace Kidoo.Learn.Courses
         public int MinAge { get; private set; }
         public int MaxAge { get; private set; }
         public ICollection<CourseSection> Sections { get; private set; }
-        private Course(){}
+        private Course() { }
         public Course(
             Guid id,
             [NotNull] string thumbnailUrl,

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Kidoo.Learn.Enums;
+﻿namespace Kidoo.Learn.Enums;
 
 public enum StoryGroup
 {

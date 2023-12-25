@@ -1,10 +1,6 @@
 ﻿using Kidoo.Learn.Enums;
 using Kidoo.Learn.PuzzleCategories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Volo.Abp.Domain.Entities.Auditing;
 
 namespace Kidoo.Learn.Puzzles
@@ -21,17 +17,17 @@ namespace Kidoo.Learn.Puzzles
         public string PuzzleText { get; private set; }
         public string PuzzleFile { get; private set; }
         public string Password { get; private set; }
-        private Puzzle(){}
+        private Puzzle() { }
         public Puzzle(
             Guid id,
-            string puzzleUrl, 
-            string puzzleKey, 
-            ComplexityLevel complexityLevel, 
-            int displayOrderId, 
-            Guid puzzleCategoryId, 
-            string description, 
-            string puzzleText, 
-            string puzzleFile, 
+            string puzzleUrl,
+            string puzzleKey,
+            ComplexityLevel complexityLevel,
+            int displayOrderId,
+            Guid puzzleCategoryId,
+            string description,
+            string puzzleText,
+            string puzzleFile,
             string password) : base(id)
         {
             PuzzleUrl = puzzleUrl;

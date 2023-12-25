@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Volo.Abp.Domain.Entities.Auditing;
 
 namespace Kidoo.Learn.PuzzleCategories
@@ -12,7 +8,7 @@ namespace Kidoo.Learn.PuzzleCategories
         public string Title { get; private set; }
         public string Description { get; private set; }
         public string ThumbnailUrl { get; private set; }
-        private PuzzleCategory(){}
+        private PuzzleCategory() { }
         public PuzzleCategory(Guid id, string title, string description, string thumbnailUrl) : base(id)
         {
             Title = title;

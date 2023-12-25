@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Volo.Abp.Domain.Repositories;
-using Volo.Abp;
-using Volo.Abp.Domain.Services;
-using Kidoo.Learn.Enums;
+﻿using Kidoo.Learn.Enums;
 using Kidoo.Learn.PuzzleCategories;
+using System;
+using System.Threading.Tasks;
+using Volo.Abp;
+using Volo.Abp.Domain.Repositories;
+using Volo.Abp.Domain.Services;
 
 namespace Kidoo.Learn.Puzzles
 {
@@ -15,7 +12,7 @@ namespace Kidoo.Learn.Puzzles
     {
         private readonly IRepository<Puzzle, Guid> _puzzleRepository;
         private readonly IRepository<PuzzleCategory, Guid> _puzzleCategoryRepository;
-        public PuzzleManager(IRepository<Puzzle, Guid> puzzleRepository, 
+        public PuzzleManager(IRepository<Puzzle, Guid> puzzleRepository,
             IRepository<PuzzleCategory, Guid> puzzleCategoryRepository)
         {
             _puzzleRepository = puzzleRepository;
@@ -27,7 +24,7 @@ namespace Kidoo.Learn.Puzzles
             if (!isExistCategory)
                 throw new BusinessException("Category not found!");
 
-            return new Puzzle(GuidGenerator.Create(), puzzleUrl, puzzleKey, complexityLevel, 
+            return new Puzzle(GuidGenerator.Create(), puzzleUrl, puzzleKey, complexityLevel,
                 displayOrderId, puzzleCategoryId, description, puzzleText, puzzleFile, password);
         }
 

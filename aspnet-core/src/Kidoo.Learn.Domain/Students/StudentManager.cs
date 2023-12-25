@@ -1,5 +1,4 @@
 ﻿using Kidoo.Learn.Enums;
-using Microsoft.AspNetCore.Identity;
 using System;
 using System.Threading.Tasks;
 using Volo.Abp;
@@ -20,7 +19,7 @@ public class StudentManager : DomainService, IStudentManager
         _userManager = userManager;
         _studentRepository = studentRepository;
     }
-     
+
 
     public async Task<Student> CreateAsync(
                            Guid userId,
@@ -39,19 +38,19 @@ public class StudentManager : DomainService, IStudentManager
 
         var studentExists = await _studentRepository.AnyAsync(x => x.EmailAddress == email && x.PhoneNumber == phoneNumber);
         if (studentExists) throw new UserFriendlyException($"Student already exists.");
-        
+
         var student = new Student(
                         userId,
                         userId,
-                        firstName, 
+                        firstName,
                         lastName,
-                        guardianName, 
-                        dateOfBirth, 
-                        gender, 
-                        address, 
-                        phoneNumber, 
-                        email, 
-                        studentClass, 
+                        guardianName,
+                        dateOfBirth,
+                        gender,
+                        address,
+                        phoneNumber,
+                        email,
+                        studentClass,
                         enrollmentDate);
 
         student.PaymentStatus = StudentPaymentStatus.Pending;
@@ -80,6 +79,6 @@ public class StudentManager : DomainService, IStudentManager
                            string studentClass,
                            StudentAgeGroup ageGroup)
     {
-       return student.Update(firstName, lastName, guardianName, dateOfBirth, gender, address, phoneNumber, email, studentClass, ageGroup);
+        return student.Update(firstName, lastName, guardianName, dateOfBirth, gender, address, phoneNumber, email, studentClass, ageGroup);
     }
 }

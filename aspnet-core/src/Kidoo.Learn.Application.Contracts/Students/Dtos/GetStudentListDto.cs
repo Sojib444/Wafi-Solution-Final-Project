@@ -1,7 +1,5 @@
 ﻿using Kidoo.Learn.Enums;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Volo.Abp.Application.Dtos;
 
 namespace Kidoo.Learn.Students.Dtos;
@@ -10,7 +8,7 @@ public class GetStudentListDto : PagedAndSortedResultRequestDto
 {
     public string Filter { get; set; }
     public string FilterAddress { get; set; }
-    
+
     public DateTime? FilterDateOfBirthStart { get; set; }
     public DateTime? FilterDateOfBirthEnd { get; set; }
 

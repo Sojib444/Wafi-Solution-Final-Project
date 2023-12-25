@@ -1,7 +1,5 @@
 ﻿using Kidoo.Learn.Enums;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Volo.Abp.Application.Dtos;
 
 namespace Kidoo.Learn.Students.Dtos;

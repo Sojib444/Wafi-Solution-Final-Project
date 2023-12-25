@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Kidoo.Learn.Consts;
+﻿namespace Kidoo.Learn.Consts;
 
 public static class QuestionConsts
 {

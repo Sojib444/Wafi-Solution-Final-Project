@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Kidoo.Learn.Files.Dtos
+﻿namespace Kidoo.Learn.Files.Dtos
 {
     public class BlobDto
     {
