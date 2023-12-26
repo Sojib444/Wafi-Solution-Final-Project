@@ -8,9 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp;
+using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
-using Volo.Abp.ObjectMapping;
 
 namespace Kidoo.Learn.Courses
 {
@@ -80,13 +80,15 @@ namespace Kidoo.Learn.Courses
             await _courseRepository.UpdateAsync(course);
         }
 
-        public async Task<ICollection<CourseDto>> GetAllCourseAsync()
+        public async Task<PagedResultDto<CourseDto>> GetListAsync()
         {
-            var course = await _courseRepository.ToListAsync();
+            var course = await _courseRepository.GetQueryableAsync();
 
-            var courseDtos = ObjectMapper.Map<List<Course>, List<CourseDto>>(course);
+            var courseDtos = ObjectMapper.Map<IQueryable<Course>, List<CourseDto>>(course);
 
-            return courseDtos;
+            var totalCount = courseDtos.Count();
+
+            return new PagedResultDto<CourseDto>(totalCount, courseDtos);
         }
     }
 }
