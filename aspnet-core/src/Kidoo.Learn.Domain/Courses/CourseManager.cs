@@ -69,6 +69,5 @@ namespace Kidoo.Learn.Courses
                 courseTopicDomainDto.ThumbnailUrl
             );
         }
-
     }
 }

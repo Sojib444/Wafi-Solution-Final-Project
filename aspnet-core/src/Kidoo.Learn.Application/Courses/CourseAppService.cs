@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Application.Services;
@@ -31,7 +30,7 @@ namespace Kidoo.Learn.Courses
             if (isExistTitle)
                 throw new BusinessException($"Course already exist with '{input.Title}' title");
 
-            var course = await _courseManager.CreateCourseAsync(input.ThumbnailUrl,input.Title, input.Description, input.NumberOfLectures, input.VideoDurationInMinutes);
+            var course = await _courseManager.CreateCourseAsync(input.ThumbnailUrl, input.Title, input.Description, input.NumberOfLectures, input.VideoDurationInMinutes);
             var result = await _courseRepository.InsertAsync(course);
 
             var dto = ObjectMapper.Map<Course, CourseDto>(result);
@@ -81,5 +80,13 @@ namespace Kidoo.Learn.Courses
             await _courseRepository.UpdateAsync(course);
         }
 
+        public async Task<ICollection<CourseDto>> GetAllCourseAsync()
+        {
+            var course = await _courseRepository.ToListAsync();
+
+            var courseDtos = ObjectMapper.Map<List<Course>, List<CourseDto>>(course);
+
+            return courseDtos;
+        }
     }
 }
