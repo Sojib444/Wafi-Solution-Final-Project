@@ -1,0 +1,15 @@
+﻿@page
+@using Kidoo.Learn.Localization
+@using Kidoo.Learn.Permissions
+@using Kidoo.Learn.Web.Pages.Dashboard
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.Extensions.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout;
+@inject IPageLayout PageLayout
+@inject IStringLocalizer<LearnResource> L
+@inject IAuthorizationService AuthorizationService
+@model Kidoo.Learn.Web.Pages.Courses.IndexModel
+@{
+    PageLayout.Content.Title = "Courses";
+}
+<h2>Courses</h2>

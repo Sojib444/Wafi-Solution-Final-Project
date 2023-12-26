@@ -5,6 +5,7 @@ public class LearnMenus
     private const string Prefix = "Learn";
     public const string Home = Prefix + ".Home";
 
+    public const string Course = Prefix + ".Course";
     public const string Student = Prefix + ".Student";
     public const string Question = Prefix + ".Question";
     public const string Exam = Prefix + ".Exam";

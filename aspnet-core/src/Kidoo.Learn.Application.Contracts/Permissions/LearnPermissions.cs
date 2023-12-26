@@ -13,6 +13,15 @@ public static class LearnPermissions
         public const string Delete = Default + ".Delete";
         public const string Approve = Default + ".Approve";
     }
+
+    public static class Courses
+    {
+        public const string Default = GroupName + ".Courses";
+        public const string Create = Default + ".Create";
+        public const string Edit = Default + ".Edit";
+        public const string Delete = Default + ".Delete";
+    }
+
     public static class Question
     {
         public const string Default = GroupName + ".Questions";

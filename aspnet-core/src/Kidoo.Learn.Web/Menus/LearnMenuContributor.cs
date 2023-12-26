@@ -43,7 +43,7 @@ public class LearnMenuContributor : IMenuContributor
                 l["Menu:Students"],
                  "~/students",
                 icon: "fa fa-user",
-                order: 1
+                order: 2
             ).RequirePermissions(LearnPermissions.Students.Default)
         );
 
@@ -84,6 +84,16 @@ public class LearnMenuContributor : IMenuContributor
                  "~/Account/Logout",
                 icon: "fa fa-share"
             )
+        );
+        context.Menu.Items.Insert(
+            6,
+            new ApplicationMenuItem(
+                LearnMenus.Course,
+                l["Menu:Course"],
+                "~/dashboard",
+                icon: "fa fa-cloud",
+                order: 1
+            ).RequirePermissions(LearnPermissions.Courses.Default)
         );
 
 

@@ -7,6 +7,7 @@ public class StudentConsts
     public const int MaxLastNameLength = 200;
     public const int MaxFatherNameLength = 200;
     public const int MaxMotherNameLength = 200;
+    public const int MaxGuardianNameLength = 200;
     public const int MaxGenderLength = 200;
     public const int MaxAddressLength = 1000;
     public const int MaxPhoneNumberLength = 200;

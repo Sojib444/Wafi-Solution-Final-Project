@@ -1,7 +1,5 @@
 ﻿using Kidoo.Learn.DomainDtos.CourseTopics;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Kidoo.Learn.DomainDtos.CourseSections
 {

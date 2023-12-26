@@ -18,6 +18,14 @@ public class LearnPermissionDefinitionProvider : PermissionDefinitionProvider
         studentPermission.AddChild(LearnPermissions.Students.ResetPassword, L("ResetPassword"));
         #endregion
 
+        #region Course permission
+        var courseGroupName = context.AddGroup("Courses", L("Courses"));
+        var coursePermission = courseGroupName.AddPermission(LearnPermissions.Courses.Default, L("Courses"));
+        coursePermission.AddChild(LearnPermissions.Courses.Create, L("Create"));
+        coursePermission.AddChild(LearnPermissions.Courses.Edit, L("Edit"));
+        coursePermission.AddChild(LearnPermissions.Courses.Delete, L("Delete"));
+        #endregion
+
         #region Question permission
         var questionGroupName = context.AddGroup("Questions", L("Questions"));
         var questionPermission = questionGroupName.AddPermission(LearnPermissions.Question.Default, L("Questions"));

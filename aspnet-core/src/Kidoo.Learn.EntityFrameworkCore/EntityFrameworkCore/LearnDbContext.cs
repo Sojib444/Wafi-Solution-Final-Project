@@ -138,7 +138,14 @@ public class LearnDbContext :
         builder.Entity<Student>(b =>
         {
             b.ToTable(LearnConsts.DbTablePrefix + "Students", LearnConsts.DbSchema);
-            b.ConfigureByConvention(); 
+            b.ConfigureByConvention();
+
+            b.Property(x => x.FirstName).HasMaxLength(StudentConsts.MaxFullNameLength).IsRequired();
+            b.Property(x => x.FirstName).HasMaxLength(StudentConsts.MaxFirstNameLength).IsRequired();
+            b.Property(x => x.LastName).HasMaxLength(StudentConsts.MaxLastNameLength).IsRequired();
+            b.Property(x => x.GuardianName).HasMaxLength(StudentConsts.MaxGuardianNameLength).IsRequired();
+            b.Property(x => x.Gender).HasMaxLength(StudentConsts.MaxGenderLength).IsRequired();
+            b.Property(x => x.Address).HasMaxLength(StudentConsts.MaxGenderLength).IsRequired();
         });
 
 
