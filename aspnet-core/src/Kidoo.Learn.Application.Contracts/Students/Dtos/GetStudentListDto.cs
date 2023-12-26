@@ -18,5 +18,4 @@ public class GetStudentListDto : PagedAndSortedResultRequestDto
     public StudentAgeGroup? FilterAgeGroup { get; set; }
     public District? FilterDistrict { get; set; }
     public StudentPaymentStatus? FilterPaymentStatus { get; set; }
-
 }

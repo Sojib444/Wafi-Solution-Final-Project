@@ -1,25 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Reflection;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Kidoo.Learn.Consts;
-using Kidoo.Learn.Enums;
+﻿using Kidoo.Learn.Enums;
 using Kidoo.Learn.Students;
 using Kidoo.Learn.Students.Dtos;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Account;
 using Volo.Abp.Account.Settings;
 using Volo.Abp.Account.Web;
-using Volo.Abp.Account.Web.Pages.Account;
 using Volo.Abp.Auditing;
 using Volo.Abp.Identity;
 using Volo.Abp.Security.Claims;
@@ -165,7 +161,7 @@ public class RegisterModel : AccountPageModel
         {
             Alerts.Danger(GetLocalizeExceptionMessage(e));
             return Page();
-        } 
+        }
     }
 
     protected virtual async Task RegisterLocalUserAsync()

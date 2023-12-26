@@ -1,9 +1,4 @@
-﻿using Kidoo.Learn.CourseSections;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Kidoo.Learn.Courses
+﻿namespace Kidoo.Learn.Courses
 {
     public class CreateUpdateCourseDto
     {
