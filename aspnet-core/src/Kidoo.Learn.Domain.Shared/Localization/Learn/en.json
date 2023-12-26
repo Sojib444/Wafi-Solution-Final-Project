@@ -5,6 +5,7 @@
     "Menu:Exam": "Exam",
     "Menu:ExamResult": "Result",
     "Menu:Dashboard": "Dashboard",
+    "Menu:Course": "Course",
     "Menu:LogOut": "Log out",
     "Menu:Question": "Question",
     "Welcome": "Welcome",
@@ -20,6 +21,12 @@
     "Permission:Students.Edit": "Editing the students",
     "Permission:Students.Delete": "Deleting the students",
     "Permission:Students.Approve": "Approve the student",
+
+    "Permission:Courses": "Course Management",
+    "Permission:Courses.Create": "Creating new Courses",
+    "Permission:Courses.Edit": "Editing the Courses",
+    "Permission:Courses.Delete": "Deleting the Courses",
+
     "Menu:Students": "Students",
     "Students": "Students",
     "StudentDeletionConfirmationMessage": "Are you sure you want to delete the '{0}'?",
