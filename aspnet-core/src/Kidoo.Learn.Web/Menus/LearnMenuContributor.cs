@@ -90,7 +90,7 @@ public class LearnMenuContributor : IMenuContributor
             new ApplicationMenuItem(
                 LearnMenus.Course,
                 l["Menu:Course"],
-                "~/dashboard",
+                "~/Courses",
                 icon: "fa fa-cloud",
                 order: 1
             ).RequirePermissions(LearnPermissions.Courses.Default)

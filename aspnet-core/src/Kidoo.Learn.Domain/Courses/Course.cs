@@ -7,10 +7,10 @@ using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Entities.Auditing;
 
 namespace Kidoo.Learn.Courses
-{
-    public class Course : FullAuditedAggregateRoot<Guid>
+{ 
+    public class Course : FullAuditedAggregateRoot<Guid>  
     {
-        public string ThumbnailUrl { get; private set; }
+        public string ThumbnailUrl { get; private set; } 
         public string Title { get; private set; }
         public string Description { get; private set; }
         public int NumberOfLectures { get; private set; }

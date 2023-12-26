@@ -12,4 +12,16 @@
 @{
     PageLayout.Content.Title = "Courses";
 }
-<h2>Courses</h2>
+
+@section scripts{
+    <abp-script src="/Pages/Courses/Index.js" />
+}
+
+<abp-card>
+    <abp-card-header>
+        <h2>@L["Courses"]</h2>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-table striped-rows="true" id="CourseTable"></abp-table>
+    </abp-card-body>
+</abp-card>
