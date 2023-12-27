@@ -10,7 +10,31 @@ $(function () {
             ajax: abp.libs.datatables.createAjax(kidoo.learn.courses.course.getList),
             columnDefs: [                                    
                 {
-                    title: l('Thumb Nill'),
+                    title: l('Title'),
+                    data: "title"
+                },
+                {
+                    title: l('Description'),
+                    data: "description"
+                },
+                {
+                    title: l('Number Of Lectures'),
+                    data: "numberOfLectures"
+                },
+                {
+                    title: l('VideoDuration'),
+                    data: "videoDurationInMinutes"
+                },
+                {
+                    title: l('Min Age'),
+                    data: "minAge"
+                },
+                {
+                    title: l('Max Age'),
+                    data: "maxAge"
+                },
+                {
+                    title: l('Thumbnil Url'),
                     data: "thumbnailUrl"
                 }
             ]
