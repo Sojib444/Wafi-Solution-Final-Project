@@ -11,18 +11,15 @@ using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
-using Volo.Abp.Identity;
 
 namespace Kidoo.Learn.Courses
 {
     public class CourseAppService : ApplicationService, ICourseAppService
     {
         private readonly ICourseManager _courseManager;
-        private readonly IdentityUserManager _userManager;
         private readonly IRepository<Course, Guid> _courseRepository;
-        public CourseAppService(IdentityUserManager userManager, ICourseManager courseManager, IRepository<Course, Guid> courseRepository)
+        public CourseAppService(ICourseManager courseManager, IRepository<Course, Guid> courseRepository)
         {
-            _userManager = userManager;
             _courseManager = courseManager;
             _courseRepository = courseRepository;
         }
@@ -43,7 +40,7 @@ namespace Kidoo.Learn.Courses
         {
             var entity = await _courseRepository.FindAsync(courseId);
 
-            if(entity == null)
+            if (entity == null)
                 throw new UserFriendlyException("Update failed, Couldn't find the requested data.");
 
             await _courseManager.UpdateCourseAsync(
@@ -53,20 +50,31 @@ namespace Kidoo.Learn.Courses
                 input.Description,
                 input.NumberOfLectures,
                 input.VideoDurationInMinutes);
-            
-            await _courseRepository.UpdateAsync(entity);
+
+            await _courseRepository.UpdateAsync(entity,true);
 
             return ObjectMapper.Map<Course, CourseDto>(entity);
         }
 
         public async Task<CourseDto> GetCourseAsync(Guid courseId)
         {
-           var course = await _courseRepository.FindAsync(courseId);
-           if(course == null)
-               throw new UserFriendlyException("Couldn't find the course");
+            var course = await _courseRepository.FindAsync(courseId);
+            if (course == null)
+                throw new UserFriendlyException("Couldn't find the course");
 
-            return ObjectMapper.Map<Course,CourseDto>(course);
+            return ObjectMapper.Map<Course, CourseDto>(course);
         }
+
+        public async Task DeleteCourseAsync(Guid courseId)
+        {
+            var entity = await _courseRepository.FindAsync(courseId);
+
+            if (entity == null)
+                throw new UserFriendlyException("Update failed, Couldn't find the requested data.");
+
+            await _courseRepository.DeleteAsync(entity,true);
+        }
+
 
         public async Task AddSectionAsync(CreateUpdateCourseSectionDto input, Guid courseId)
         {

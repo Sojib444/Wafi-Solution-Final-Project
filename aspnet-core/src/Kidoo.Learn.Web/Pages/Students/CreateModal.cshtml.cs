@@ -1,7 +1,6 @@
 using Kidoo.Learn.Students;
 using Kidoo.Learn.Students.Dtos;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
 
 namespace Kidoo.Learn.Web.Pages.Students;
@@ -27,5 +26,5 @@ public class CreateModal : KidooPageModel
     {
         await _studentAppService.CreateAsync(Student);
         return Page();
-    } 
+    }
 }
