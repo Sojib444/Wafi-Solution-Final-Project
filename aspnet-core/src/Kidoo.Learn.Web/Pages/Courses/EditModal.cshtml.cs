@@ -1,32 +1,29 @@
 using Kidoo.Learn.Courses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Threading.Tasks;
+using System;
 
 namespace Kidoo.Learn.Web.Pages.Courses
 {
-    public class CreateModal : PageModel
+    public class EditModal : PageModel
     {
+        [HiddenInput]
+        [BindProperty(SupportsGet = true)]
+        public Guid Id { get; set; }
+
         [BindProperty]
         public CreateUpdateCourseDto Course { get; set; }
 
         private ICourseAppService _courseAppService;
 
-        public CreateModal(ICourseAppService courseAppService)
+        public EditModal(ICourseAppService courseAppService)
         {
             _courseAppService = courseAppService;
         }
 
         public async Task OnGetAsync()
         {
-            Course = new CreateUpdateCourseDto();
-        }
 
-        public async Task<IActionResult> OnPostAsync()
-        {
-            await _courseAppService.CreateCourseAsync(Course);
-
-            return Page();
         }
     }
 }

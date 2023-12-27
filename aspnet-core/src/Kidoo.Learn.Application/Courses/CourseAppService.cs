@@ -33,8 +33,24 @@ namespace Kidoo.Learn.Courses
             var course = await _courseManager.CreateCourseAsync(input.ThumbnailUrl, input.Title, input.Description, input.NumberOfLectures, input.VideoDurationInMinutes);
             var result = await _courseRepository.InsertAsync(course);
 
-            var dto = ObjectMapper.Map<Course, CourseDto>(result);
-            return dto;
+            return ObjectMapper.Map<Course, CourseDto>(result);
+        }
+
+        public async Task<CourseDto> UpdateCourseAsync(CreateUpdateCourseDto input, Guid courseId)
+        {
+            var entity = _courseRepository.FindAsync(courseId);
+            if(entity == null)
+                throw new UserFriendlyException("Update failed, Couldn't find the requested data.");
+
+            var courseTitle = _courseRepository.FindAsync(x => x.Title == input.Title);
+            if(courseTitle != null)
+                throw new BusinessException("Update failed, Course title already Exixts.");
+
+            var course = ObjectMapper.Map<CreateUpdateCourseDto, Course>(input);
+
+            await _courseRepository.UpdateAsync(course);
+
+            return ObjectMapper.Map<Course, CourseDto>(course);
         }
 
         public async Task AddSectionAsync(CreateUpdateCourseSectionDto input, Guid courseId)
