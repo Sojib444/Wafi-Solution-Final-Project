@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Kidoo.Learn.Web.Pages.Students;
 
-public class CreateModal : PageModel
+public class CreateModal : KidooPageModel
 {
     [BindProperty]
     public CreateUpdateStudentDto Student { get; set; }

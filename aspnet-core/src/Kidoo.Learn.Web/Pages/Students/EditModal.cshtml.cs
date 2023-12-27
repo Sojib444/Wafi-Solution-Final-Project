@@ -1,10 +1,8 @@
-using AutoMapper.Internal.Mappers;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Threading.Tasks;
-using System;
-using Kidoo.Learn.Students.Dtos;
 using Kidoo.Learn.Students;
+using Kidoo.Learn.Students.Dtos;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace Kidoo.Learn.Web.Pages.Students;
 

@@ -53,6 +53,15 @@ namespace Kidoo.Learn.Courses
             return ObjectMapper.Map<Course, CourseDto>(course);
         }
 
+        public async Task<CourseDto> GetCourseAsync(Guid courseId)
+        {
+           var course = await _courseRepository.FindAsync(courseId);
+           if(course == null)
+               throw new UserFriendlyException("Couldn't find the course");
+
+            return ObjectMapper.Map<Course,CourseDto>(course);
+        }
+
         public async Task AddSectionAsync(CreateUpdateCourseSectionDto input, Guid courseId)
         {
             var course = await (await _courseRepository.GetQueryableAsync()).Where(x => x.Id == courseId).Include(x => x.Sections).FirstOrDefaultAsync();
