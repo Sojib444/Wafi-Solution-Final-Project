@@ -42,6 +42,16 @@ namespace Kidoo.Learn.Courses
                 videoDurationInMinutes);
         }
 
+        public async Task<Course> UpdateCourseAsync(Course course,
+            [NotNull] string thumbnailUrl,
+            [NotNull] string title,
+            [NotNull] string description,
+            int numberOfLectures,
+            double videoDurationInMinutes)
+        {
+            return course.Update(thumbnailUrl, title, description, numberOfLectures, videoDurationInMinutes);
+        }
+
         public async Task AddSectionAsync(Course course, CreateUpdateCourseSectionDomainDto courseSectionDomainDto, Guid courseId)
         {
             course.AddSection(

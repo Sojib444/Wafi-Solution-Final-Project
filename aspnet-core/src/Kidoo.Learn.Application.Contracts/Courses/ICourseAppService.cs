@@ -10,7 +10,7 @@ namespace Kidoo.Learn.Courses
     public interface ICourseAppService : IApplicationService
     {
         Task<CourseDto> CreateCourseAsync(CreateUpdateCourseDto input);
-        Task<CourseDto> UpdateCourseAsync(CreateUpdateCourseDto input, Guid courseId);
+        Task<CourseDto> UpdateCourseAsync(UpdateCourseDto input, Guid courseId);
         Task<CourseDto> GetCourseAsync(Guid courseId);
         Task<PagedResultDto<CourseDto>> GetListAsync();
 

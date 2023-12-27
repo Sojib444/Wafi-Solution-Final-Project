@@ -1,6 +1,7 @@
 $(function () {
     var l = abp.localization.getResource('Learn');
     var createModal = new abp.ModalManager(abp.appPath + 'Courses/CreateModal');
+    var editModal = new abp.ModalManager(abp.appPath + 'Courses/EditModal');
 
     var dataTable = $('#CoursesTable').DataTable(
         abp.libs.datatables.normalizeConfiguration({
@@ -9,7 +10,21 @@ $(function () {
             searching: false,
             scrollX: true,
             ajax: abp.libs.datatables.createAjax(kidoo.learn.courses.course.getList),
-            columnDefs: [                                    
+            columnDefs: [ 
+                {
+                    title: l('Actions'),
+                    rowAction: {
+                        items:
+                            [
+                                {
+                                    text: l('Edit'),
+                                    action: function (data) {
+                                        editModal.open({ id: data.record.id });
+                                    }
+                                }
+                            ]
+                    }
+                },
                 {
                     title: l('Title'),
                     data: "title"
@@ -43,6 +58,10 @@ $(function () {
     );
 
     createModal.onResult(function () {
+        dataTable.ajax.reload();
+    });
+
+    editModal.onResult(function () {
         dataTable.ajax.reload();
     });
 

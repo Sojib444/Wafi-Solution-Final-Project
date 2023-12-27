@@ -11,15 +11,18 @@ using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
+using Volo.Abp.Identity;
 
 namespace Kidoo.Learn.Courses
 {
     public class CourseAppService : ApplicationService, ICourseAppService
     {
         private readonly ICourseManager _courseManager;
+        private readonly IdentityUserManager _userManager;
         private readonly IRepository<Course, Guid> _courseRepository;
-        public CourseAppService(ICourseManager courseManager, IRepository<Course, Guid> courseRepository)
+        public CourseAppService(IdentityUserManager userManager, ICourseManager courseManager, IRepository<Course, Guid> courseRepository)
         {
+            _userManager = userManager;
             _courseManager = courseManager;
             _courseRepository = courseRepository;
         }
@@ -36,21 +39,24 @@ namespace Kidoo.Learn.Courses
             return ObjectMapper.Map<Course, CourseDto>(result);
         }
 
-        public async Task<CourseDto> UpdateCourseAsync(CreateUpdateCourseDto input, Guid courseId)
+        public async Task<CourseDto> UpdateCourseAsync(UpdateCourseDto input, Guid courseId)
         {
-            var entity = _courseRepository.FindAsync(courseId);
+            var entity = await _courseRepository.FindAsync(courseId);
+
             if(entity == null)
                 throw new UserFriendlyException("Update failed, Couldn't find the requested data.");
 
-            var courseTitle = _courseRepository.FindAsync(x => x.Title == input.Title);
-            if(courseTitle != null)
-                throw new BusinessException("Update failed, Course title already Exixts.");
+            await _courseManager.UpdateCourseAsync(
+                entity,
+                input.ThumbnailUrl,
+                input.Title,
+                input.Description,
+                input.NumberOfLectures,
+                input.VideoDurationInMinutes);
+            
+            await _courseRepository.UpdateAsync(entity);
 
-            var course = ObjectMapper.Map<CreateUpdateCourseDto, Course>(input);
-
-            await _courseRepository.UpdateAsync(course);
-
-            return ObjectMapper.Map<Course, CourseDto>(course);
+            return ObjectMapper.Map<Course, CourseDto>(entity);
         }
 
         public async Task<CourseDto> GetCourseAsync(Guid courseId)

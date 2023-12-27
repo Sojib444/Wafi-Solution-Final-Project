@@ -34,6 +34,21 @@ namespace Kidoo.Learn.Courses
             VideoDurationInMinutes = videoDurationInMinutes;
         }
 
+        public Course Update(
+            [NotNull] string thumbnailUrl,
+            [NotNull] string title,
+            [NotNull] string description,
+            [NotNull] int numberOfLectures,
+            [NotNull] double videoDurationInMinutes) 
+        {
+            ThumbnailUrl = thumbnailUrl;
+            Title = title;
+            Description = description;
+            NumberOfLectures = numberOfLectures;
+            VideoDurationInMinutes = videoDurationInMinutes;
+            return this;
+        }
+
         internal Course AddSection(
             Guid id,
             [NotNull] string thumbnailUrl,

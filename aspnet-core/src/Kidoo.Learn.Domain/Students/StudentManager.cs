@@ -66,6 +66,7 @@ public class StudentManager : DomainService, IStudentManager
 
         return entity;
     }
+
     public async Task<Student> UpdateAsync(
                            Student student,
                            string firstName,

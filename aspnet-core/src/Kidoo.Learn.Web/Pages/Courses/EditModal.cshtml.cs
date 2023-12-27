@@ -13,7 +13,7 @@ namespace Kidoo.Learn.Web.Pages.Courses
 
         [HiddenInput]
         [BindProperty(SupportsGet = true)]
-        public CreateUpdateCourseDto Course { get; set; }
+        public UpdateCourseDto Course { get; set; }
 
         private ICourseAppService _courseAppService;
 
@@ -26,12 +26,12 @@ namespace Kidoo.Learn.Web.Pages.Courses
         {
             var course = await _courseAppService.GetCourseAsync(Id);
 
-            Course = ObjectMapper.Map<CourseDto, CreateUpdateCourseDto>(course);
+            Course = ObjectMapper.Map<CourseDto, UpdateCourseDto>(course);
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            await _courseAppService.UpdateCourseAsync(Course, Id);
+            var result = await _courseAppService.UpdateCourseAsync(Course, Id);
 
             return Page();
         }
