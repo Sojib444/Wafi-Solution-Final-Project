@@ -8,7 +8,7 @@ namespace Kidoo.Learn.Web.Pages.Courses
     public class CreateModal : PageModel
     {
         [BindProperty]
-        public CreateUpdateCourseDto createUpdateCourse { get; set; }
+        public CreateUpdateCourseDto Course { get; set; }
 
         private ICourseAppService _courseAppService;
 
@@ -19,12 +19,12 @@ namespace Kidoo.Learn.Web.Pages.Courses
 
         public void OnGet()
         {
-            createUpdateCourse = new CreateUpdateCourseDto();
+            Course = new CreateUpdateCourseDto();
         }
 
         public async Task<IActionResult> OnPost()
         {
-            await _courseAppService.CreateCourseAsync(createUpdateCourse);
+            await _courseAppService.CreateCourseAsync(Course);
 
             return Page();
         }

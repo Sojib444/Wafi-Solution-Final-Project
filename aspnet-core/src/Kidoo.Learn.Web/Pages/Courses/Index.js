@@ -1,5 +1,6 @@
 $(function () {
     var l = abp.localization.getResource('Learn');
+    var createModal = new abp.ModalManager(abp.appPath + 'Courses/CreateModal');
 
     var dataTable = $('#CoursesTable').DataTable(
         abp.libs.datatables.normalizeConfiguration({
@@ -40,4 +41,13 @@ $(function () {
             ]
         })
     );
+
+    createModal.onResult(function () {
+        dataTable.ajax.reload();
+    });
+
+    $('#NewCourseButton').click(function (e) {
+        e.preventDefault();
+        createModal.open();
+    });
 });
