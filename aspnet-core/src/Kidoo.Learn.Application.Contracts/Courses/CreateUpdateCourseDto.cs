@@ -8,12 +8,12 @@ namespace Kidoo.Learn.Courses
         [Required]
         public string ThumbnailUrl { get; set; }
 
-        [Required]
-        [StringLength(CourseConsts.MaxTitleLength)]
+        [Required(ErrorMessage = "Tittle is required")]
+        [StringLength(CourseConsts.MaxTitleLength, ErrorMessage = "Title cannot exceed {1} characters")]
         public string Title { get; set; }
 
-        [Required]
-        [StringLength(CourseConsts.MaxDescriptionLength)]
+        [Required(ErrorMessage = "Tittle is required")]
+        [StringLength(CourseConsts.MaxDescriptionLength, ErrorMessage = "Title cannot exceed {1} characters")]
         public string Description { get; set; }
 
         [Required]
