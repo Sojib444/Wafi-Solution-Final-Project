@@ -1,5 +1,6 @@
 ﻿using Kidoo.Learn.Consts;
 using Kidoo.Learn.Consts.Course;
+using Kidoo.Learn.Consts.Section;
 using Kidoo.Learn.Courses;
 using Kidoo.Learn.CourseSections;
 using Kidoo.Learn.CourseTopics;
@@ -164,6 +165,9 @@ public class LearnDbContext :
         {
             b.ToTable(LearnConsts.DbTablePrefix + "CourseSections", LearnConsts.DbSchema);
             b.ConfigureByConvention();
+
+            b.Property(x => x.Title).HasMaxLength(CourseSectionConsts.MaxTitleLength).IsRequired();
+            b.Property(x => x.ThumbnailUrl).IsRequired();
         });
 
         builder.Entity<CourseTopic>(b =>
