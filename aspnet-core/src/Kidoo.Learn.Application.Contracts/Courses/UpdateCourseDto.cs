@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Kidoo.Learn.Courses
 {
-    public class CreateUpdateCourseDto
+    public class UpdateCourseDto
     {
         [Required]
         public string ThumbnailUrl { get; set; }
@@ -27,6 +27,5 @@ namespace Kidoo.Learn.Courses
 
         [Required]
         public int MaxAge { get; set; }
-        //public ICollection<CreateUpdateCourseSectionDto> CourseSections { get; set; }
     }
 }

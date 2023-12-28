@@ -1,0 +1,23 @@
+﻿@page
+@using Kidoo.Learn.Localization
+@using Kidoo.Learn.Permissions
+@using Kidoo.Learn.Web.Pages.Students
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.Extensions.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal;
+@inject IStringLocalizer<LearnResource> L
+@inject IAuthorizationService AuthorizationService
+@model Kidoo.Learn.Web.Pages.Courses.CreateModal
+@{
+    Layout = null;
+}
+
+<abp-dynamic-form abp-model="Course" asp-page="/Courses/CreateModal">
+    <abp-modal scrollable="true" size="Large">
+        <abp-modal-header title="@L["NewCourse"].Value"></abp-modal-header>
+        <abp-modal-body>
+            <abp-form-content />
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-modal>
+</abp-dynamic-form>

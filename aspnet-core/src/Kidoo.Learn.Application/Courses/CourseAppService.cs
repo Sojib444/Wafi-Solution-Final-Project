@@ -6,12 +6,11 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp;
+using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
-using Volo.Abp.ObjectMapping;
 
 namespace Kidoo.Learn.Courses
 {
@@ -31,12 +30,51 @@ namespace Kidoo.Learn.Courses
             if (isExistTitle)
                 throw new BusinessException($"Course already exist with '{input.Title}' title");
 
-            var course = await _courseManager.CreateCourseAsync(input.ThumbnailUrl,input.Title, input.Description, input.NumberOfLectures, input.VideoDurationInMinutes);
+            var course = await _courseManager.CreateCourseAsync(input.ThumbnailUrl, input.Title, input.Description, input.NumberOfLectures, input.VideoDurationInMinutes);
             var result = await _courseRepository.InsertAsync(course);
 
-            var dto = ObjectMapper.Map<Course, CourseDto>(result);
-            return dto;
+            return ObjectMapper.Map<Course, CourseDto>(result);
         }
+
+        public async Task<CourseDto> UpdateCourseAsync(UpdateCourseDto input, Guid courseId)
+        {
+            var entity = await _courseRepository.FindAsync(courseId);
+
+            if (entity == null)
+                throw new UserFriendlyException("Update failed, Couldn't find the requested data.");
+
+            await _courseManager.UpdateCourseAsync(
+                entity,
+                input.ThumbnailUrl,
+                input.Title,
+                input.Description,
+                input.NumberOfLectures,
+                input.VideoDurationInMinutes);
+
+            await _courseRepository.UpdateAsync(entity,true);
+
+            return ObjectMapper.Map<Course, CourseDto>(entity);
+        }
+
+        public async Task<CourseDto> GetCourseAsync(Guid courseId)
+        {
+            var course = await _courseRepository.FindAsync(courseId);
+            if (course == null)
+                throw new UserFriendlyException("Couldn't find the course");
+
+            return ObjectMapper.Map<Course, CourseDto>(course);
+        }
+
+        public async Task DeleteCourseAsync(Guid courseId)
+        {
+            var entity = await _courseRepository.FindAsync(courseId);
+
+            if (entity == null)
+                throw new UserFriendlyException("Update failed, Couldn't find the requested data.");
+
+            await _courseRepository.DeleteAsync(entity,true);
+        }
+
 
         public async Task AddSectionAsync(CreateUpdateCourseSectionDto input, Guid courseId)
         {
@@ -81,5 +119,15 @@ namespace Kidoo.Learn.Courses
             await _courseRepository.UpdateAsync(course);
         }
 
+        public async Task<PagedResultDto<CourseDto>> GetListAsync()
+        {
+            var course = await _courseRepository.GetQueryableAsync();
+
+            var courseDtos = ObjectMapper.Map<IQueryable<Course>, List<CourseDto>>(course);
+
+            var totalCount = courseDtos.Count();
+
+            return new PagedResultDto<CourseDto>(totalCount, courseDtos);
+        }
     }
 }

@@ -22,12 +22,17 @@ public class LearnApplicationAutoMapperProfile : Profile
         /* You can configure your AutoMapper mapping configuration here.
          * Alternatively, you can split your mapping configurations
          * into multiple profile classes for a better organization. */
+
+        #region Course Mapping
         CreateMap<Course, CourseDto>().ReverseMap();
+        CreateMap<CreateUpdateCourseDto, Course>().ReverseMap();
+
         CreateMap<CourseTopic, CourseTopicDto>().ReverseMap();
         CreateMap<CourseSection, CourseSectionDto>().ReverseMap();
         CreateMap<CourseSection, CourseTopicDto>().ReverseMap();
         CreateMap<CreateUpdateCourseSectionDto, CreateUpdateCourseSectionDomainDto>().ReverseMap();
         CreateMap<CreateUpdateCourseTopicDto, CreateUpdateCourseTopicDomainDto>().ReverseMap();
+        #endregion
 
         #region Question mapping
         CreateMap<Question, QuestionDto>().ReverseMap(); 

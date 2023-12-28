@@ -12,4 +12,26 @@
 @{
     PageLayout.Content.Title = "Courses";
 }
-<h2>Courses</h2>
+
+@section scripts{
+    <abp-script src="/Pages/Courses/Index.js" />
+}
+
+<abp-card>
+    <abp-card-header>
+        <abp-row>
+            <abp-column size-md="_6">
+                <abp-card-title>@L["Courses"]</abp-card-title>
+            </abp-column>
+            <abp-column size-md="_6" class="text-end">
+                <abp-button id="NewCourseButton"
+                            text="@L["NewCourse"].Value"
+                            icon="plus"
+                            button-type="Primary" />
+            </abp-column>
+        </abp-row>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-table striped-rows="true" id="CoursesTable"></abp-table>
+    </abp-card-body>
+</abp-card>
