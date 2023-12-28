@@ -2,6 +2,7 @@ $(function () {
     var l = abp.localization.getResource('Learn');
     var createModal = new abp.ModalManager(abp.appPath + 'Courses/CreateModal');
     var editModal = new abp.ModalManager(abp.appPath + 'Courses/EditModal');
+    var sectionModal = new abp.ModalManager(abp.appPath + 'CourseSections');
 
     var dataTable = $('#CoursesTable').DataTable(
         abp.libs.datatables.normalizeConfiguration({
@@ -19,7 +20,13 @@ $(function () {
                                 {
                                     text: l('Edit'),
                                     action: function (data) {
-                                        editModal.open({ id: data.record.id });
+                                        editModal.open({ id: data.record.id});
+                                    }
+                                },
+                                {
+                                    text: l('Setions'),
+                                    action: function (data) {
+                                        sectionModal.open({ name: data.record.title, id: data.record.id });
                                     }
                                 },
                                 {
@@ -31,7 +38,6 @@ $(function () {
                                         );
                                     },
                                     action: function (data) {
-                                        console.log(data.record.id);
                                         kidoo.learn.courses.course
                                             .deleteCourse(data.record.id)
                                             .then(function () {

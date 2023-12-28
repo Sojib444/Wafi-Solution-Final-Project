@@ -1,0 +1,36 @@
+﻿@page
+@using Kidoo.Learn.Localization
+@using Kidoo.Learn.Permissions
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.Extensions.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout;
+@inject IPageLayout PageLayout
+@inject IStringLocalizer<LearnResource> L
+@inject IAuthorizationService AuthorizationService
+@model Kidoo.Learn.Web.Pages.CourseSections.IndexModel
+@{
+    PageLayout.Content.Title = "Sections";
+}
+
+@section scripts {
+    <abp-script src="/Pages/CourseSections/Index.js" />
+}
+
+<abp-card>
+    <abp-card-header>
+        <abp-row>
+            <abp-column size-md="_6">
+                <abp-card-title>@Model.Name @L["Sections"]</abp-card-title>
+            </abp-column>
+            <abp-column size-md="_6" class="text-end">
+                <abp-button id="NewCourseSectionButton"
+                            text="@L["NewCourseSection"].Value"
+                            icon="plus"
+                            button-type="Primary" />
+            </abp-column>
+        </abp-row>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-table striped-rows="true" id="CourseSectionsTable"></abp-table>
+    </abp-card-body>
+</abp-card>
