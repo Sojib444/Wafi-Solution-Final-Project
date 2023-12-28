@@ -24,7 +24,7 @@ $(function () {
                                     }
                                 },
                                 {
-                                    text: l('Setions'),
+                                    text: l('Sections'),
                                     action: function (data) {
                                         sectionModal.open({ name: data.record.title, id: data.record.id });
                                     }

@@ -91,7 +91,7 @@ namespace Kidoo.Learn.Courses
                 .Where(x => x.Id == courseId)
                 .Include(x => x.Sections)
                 .FirstOrDefaultAsync();
-
+            
             var courseSection = ObjectMapper.Map<ICollection<CourseSection>, List< CreateUpdateCourseSectionDto>>(course.Sections);
 
             if (course == null)
