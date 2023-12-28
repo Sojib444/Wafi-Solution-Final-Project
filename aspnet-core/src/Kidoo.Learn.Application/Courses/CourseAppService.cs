@@ -85,21 +85,21 @@ namespace Kidoo.Learn.Courses
 
         //Course Feature
         //Path: CourseAppService --> CourseManager --> Domain layer for UpdateCreateDomain
-        public async Task<PagedResultDto<CreateUpdateCourseSectionDto>> GetCouresSectionsAsync(Guid courseId)
+        public async Task<PagedResultDto<CourseSectionDto>> GetCouresSectionsAsync(Guid courseId)
         {            
             var course = await (await _courseRepository.GetQueryableAsync())
                 .Where(x => x.Id == courseId)
                 .Include(x => x.Sections)
                 .FirstOrDefaultAsync();
             
-            var courseSection = ObjectMapper.Map<ICollection<CourseSection>, List< CreateUpdateCourseSectionDto>>(course.Sections);
+            var courseSection = ObjectMapper.Map<ICollection<CourseSection>, List< CourseSectionDto>>(course.Sections);
 
             if (course == null)
                 throw new BusinessException("Course couldn't found");
 
             var totalCount = courseSection.Count();
 
-            return new PagedResultDto<CreateUpdateCourseSectionDto>(totalCount, courseSection);
+            return new PagedResultDto<CourseSectionDto>(totalCount, courseSection);
         }
 
         public async Task AddSectionAsync(CreateUpdateCourseSectionDto input, Guid courseId)

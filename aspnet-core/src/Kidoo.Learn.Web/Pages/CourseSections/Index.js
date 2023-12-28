@@ -1,7 +1,7 @@
 $(function () {
     var l = abp.localization.getResource('Learn');
-    var createModal = new abp.ModalManager(abp.appPath + 'Courses/CreateModal');
-    var editModal = new abp.ModalManager(abp.appPath + 'Courses/EditModal');
+    var createModal = new abp.ModalManager(abp.appPath + 'CourseSections/CreateModal');
+    var editModal = new abp.ModalManager(abp.appPath + 'CourseSections/EditModal');
     var courseId = $('#CourseId').val();
 
     var dataTable = $('#CourseSectionsTable').DataTable(
@@ -85,8 +85,8 @@ $(function () {
         dataTable.ajax.reload();
     });
 
-    $('#NewCourseButton').click(function (e) {
+    $('#NewCourseSectionButton').click(function (e) {
         e.preventDefault();
-        createModal.open();
+        createModal.open({ courseId: courseId });
     });
 });
