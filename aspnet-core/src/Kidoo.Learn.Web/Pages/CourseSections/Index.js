@@ -76,9 +76,13 @@ $(function () {
         dataTable.ajax.reload();
     });
 
+    createModal.onResult(function () {
+        dataTable.ajax.reload();
+    });
+
     $('#NewCourseSectionButton').click(function (e) {
         e.preventDefault();
-        createModal.open();
+        createModal.open({ courseId });
     });
 });
 

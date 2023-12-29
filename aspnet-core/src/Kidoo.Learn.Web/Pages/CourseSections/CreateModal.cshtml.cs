@@ -11,7 +11,7 @@ namespace Kidoo.Learn.Web.Pages.CourseSections
     {
         [HiddenInput]
         [BindProperty(SupportsGet = true)]
-        public Guid Id { get; set; }
+        public Guid CourseId { get; set; }
 
         [BindProperty]
         public  CreateUpdateCourseSectionDto courseSection { get; set; }
@@ -30,7 +30,7 @@ namespace Kidoo.Learn.Web.Pages.CourseSections
 
         public async Task<IActionResult> OnPostAsync()
         {
-            await _courseAppService.AddSectionAsync(courseSection, Id);
+            await _courseAppService.AddSectionAsync(courseSection, CourseId);
 
             return Page();
         }

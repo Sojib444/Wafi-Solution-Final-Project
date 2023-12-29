@@ -49,7 +49,7 @@ namespace Kidoo.Learn.CourseSections
             VideoDurationInMinutes = videoDurationInMinutes;
             MinAge = minAge;
             MaxAge = maxAge;
-            CourseId = Guid.Empty;
+            CourseId = courseId;
 
             return this;
         }
