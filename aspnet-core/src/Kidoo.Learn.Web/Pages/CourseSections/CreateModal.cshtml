@@ -6,15 +6,16 @@
 @using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal;
 @inject IStringLocalizer<LearnResource> L
 @inject IAuthorizationService AuthorizationService
-@model Kidoo.Learn.Web.Pages.Courses.CreateModal
+@model Kidoo.Learn.Web.Pages.CourseSections.CreateModal
 @{
     Layout = null;
 }
 
-<abp-dynamic-form abp-model="Course" asp-page="/Courses/CreateModal">
+<abp-dynamic-form abp-model="courseSection" asp-page="/CourseSections/CreateModal">
     <abp-modal scrollable="true" size="Large">
-        <abp-modal-header title="@L["NewCourse"].Value"></abp-modal-header>
+        <abp-modal-header title="@L["NewCourseSection"].Value"></abp-modal-header>
         <abp-modal-body>
+            <abp-input asp-for="CourseId" />
             <abp-form-content />
         </abp-modal-body>
         <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>

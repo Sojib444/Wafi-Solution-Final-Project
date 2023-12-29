@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Kidoo.Learn.CourseTopics
+﻿namespace Kidoo.Learn.CourseTopics
 {
     public class CreateUpdateCourseTopicDto
     {

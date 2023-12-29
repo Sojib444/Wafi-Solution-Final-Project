@@ -24,13 +24,21 @@ namespace Kidoo.Learn.Courses
             _courseRepository = courseRepository;
         }
 
+        //Course Feature
+        //Path: CourseAppService --> CourseManager --> Domain layer for UpdateCreateDomain
         public async Task<CourseDto> CreateCourseAsync(CreateUpdateCourseDto input)
         {
             var isExistTitle = await _courseRepository.AnyAsync(x => x.Title == input.Title);
             if (isExistTitle)
                 throw new BusinessException($"Course already exist with '{input.Title}' title");
 
-            var course = await _courseManager.CreateCourseAsync(input.ThumbnailUrl, input.Title, input.Description, input.NumberOfLectures, input.VideoDurationInMinutes);
+            var course = await _courseManager.CreateCourseAsync(
+                input.ThumbnailUrl,
+                input.Title,
+                input.Description,
+                input.NumberOfLectures,
+                input.VideoDurationInMinutes);
+
             var result = await _courseRepository.InsertAsync(course);
 
             return ObjectMapper.Map<Course, CourseDto>(result);
@@ -51,7 +59,7 @@ namespace Kidoo.Learn.Courses
                 input.NumberOfLectures,
                 input.VideoDurationInMinutes);
 
-            await _courseRepository.UpdateAsync(entity,true);
+            await _courseRepository.UpdateAsync(entity, true);
 
             return ObjectMapper.Map<Course, CourseDto>(entity);
         }
@@ -70,15 +78,48 @@ namespace Kidoo.Learn.Courses
             var entity = await _courseRepository.FindAsync(courseId);
 
             if (entity == null)
-                throw new UserFriendlyException("Update failed, Couldn't find the requested data.");
+                throw new UserFriendlyException("Delete failed, Couldn't find the requested data.");
 
-            await _courseRepository.DeleteAsync(entity,true);
+            await _courseRepository.DeleteAsync(entity, true);
         }
 
+        //Course Feature
+        //Path: CourseAppService --> CourseManager --> Domain layer for UpdateCreateDomain
+        public async Task<PagedResultDto<CourseSectionDto>> GetCouresSectionsListAsync(Guid courseId)
+        {
+            var course = await (await _courseRepository.GetQueryableAsync())
+                .Where(x => x.Id == courseId)
+                .Include(x => x.Sections)
+                .FirstOrDefaultAsync();
+
+            var courseSection = ObjectMapper.Map<ICollection<CourseSection>, List<CourseSectionDto>>(course.Sections);
+
+            if (course == null)
+                throw new BusinessException("Course couldn't found");
+
+            var totalCount = courseSection.Count();
+
+            return new PagedResultDto<CourseSectionDto>(totalCount, courseSection);
+        }
+
+        public async Task<CourseSectionDto> GetCourseSectionAsync(Guid courseId, Guid sectionId)
+        {
+            var course = await (await _courseRepository.GetQueryableAsync())
+                            .Where(x => x.Id == courseId)
+                            .Include(x => x.Sections)
+                            .FirstOrDefaultAsync();
+
+            var courseSection = course.Sections.Where(x => x.Id == sectionId).FirstOrDefault();
+
+            return ObjectMapper.Map<CourseSection, CourseSectionDto>(courseSection);
+        }
 
         public async Task AddSectionAsync(CreateUpdateCourseSectionDto input, Guid courseId)
         {
-            var course = await (await _courseRepository.GetQueryableAsync()).Where(x => x.Id == courseId).Include(x => x.Sections).FirstOrDefaultAsync();
+            var course = await (await _courseRepository.GetQueryableAsync())
+                .Where(x => x.Id == courseId)
+                .Include(x => x.Sections)
+                .FirstOrDefaultAsync();
 
             var courseSectionDomainDto = ObjectMapper.Map<CreateUpdateCourseSectionDto, CreateUpdateCourseSectionDomainDto>(input);
 
@@ -92,9 +133,37 @@ namespace Kidoo.Learn.Courses
             var course = await (await _courseRepository.GetQueryableAsync()).Where(x => x.Id == courseId)
                                     .Include(x => x.Sections).FirstOrDefaultAsync();
 
-            course.UpdateSection(sectionId, input.ThumbnailUrl, input.Title, input.VideoDurationInMinutes, input.MinAge, input.MaxAge, courseId);
+            if (course == null)
+                throw new BusinessException("Course couldn't found");
+
+            course.UpdateSection(sectionId,
+                input.ThumbnailUrl, 
+                input.Title, 
+                input.VideoDurationInMinutes,
+                input.MinAge, 
+                input.MaxAge,
+                courseId);
 
             await _courseRepository.UpdateAsync(course);
+        }
+
+        public async Task DeleteSectionAsync(CreateUpdateCourseSectionDto input, Guid courseId, Guid sectionId)
+        {
+            var course = await (await _courseRepository.GetQueryableAsync()).Where(x => x.Id == courseId)
+                                    .Include(x => x.Sections).FirstOrDefaultAsync();
+
+            if (course == null)
+                throw new BusinessException("Course couldn't found");
+
+            course.DeleteSection(sectionId,
+                input.ThumbnailUrl,
+                input.Title, 
+                input.VideoDurationInMinutes,
+                input.MinAge,
+                input.MaxAge, 
+                courseId);
+
+                await _courseRepository.UpdateAsync(course);            
         }
 
         public async Task AddTopicAsync(CreateUpdateCourseTopicDto input, Guid sectionId, Guid courseId)

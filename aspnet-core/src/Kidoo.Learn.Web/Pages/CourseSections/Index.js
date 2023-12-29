@@ -1,17 +1,21 @@
 $(function () {
     var l = abp.localization.getResource('Learn');
-    var createModal = new abp.ModalManager(abp.appPath + 'Courses/CreateModal');
-    var editModal = new abp.ModalManager(abp.appPath + 'Courses/EditModal');
-    var sectionModal = new abp.ModalManager(abp.appPath + 'CourseSections');
+    var createModal = new abp.ModalManager(abp.appPath + 'CourseSections/CreateModal');
+    var editModal = new abp.ModalManager(abp.appPath + 'CourseSections/EditModal');
+    var courseId = $('#CourseId').val();
+    console.log(courseId);
 
-    var dataTable = $('#CoursesTable').DataTable(
+
+    var dataTable = $('#CourseSectionsTable').DataTable(
         abp.libs.datatables.normalizeConfiguration({
             serverSide: true,
             paging: true,
-            searching: true,
+            searching: false,
             scrollX: true,
-            ajax: abp.libs.datatables.createAjax(kidoo.learn.courses.course.getList),
-            columnDefs: [ 
+            ajax: abp.libs.datatables.createAjax(function (data) {
+                return kidoo.learn.courses.course.getCouresSectionsList(courseId);
+            }),
+            columnDefs: [
                 {
                     title: l('Actions'),
                     rowAction: {
@@ -20,27 +24,19 @@ $(function () {
                                 {
                                     text: l('Edit'),
                                     action: function (data) {
-                                        editModal.open({ id: data.record.id});
+                                        editModal.open({ id: data.record.id, courseId: courseId });
                                     }
-                                },
-                                {
-                                    text: l('Sections'),
-                                    action: function (data) {
-                                        window.location.href = '/CourseSections?courseid=' + data.record.id + '&name=' + data.record.title;
-                                    }                                      
-                                    
                                 },
                                 {
                                     text: l('Delete'),
                                     confirmMessage: function (data) {
                                         return l(
-                                            'CourseDeletionConfirmationMessage',
-                                            data.record.name
+                                            'CourseSectionDeletionConfirmationMessage'
                                         );
                                     },
                                     action: function (data) {
                                         kidoo.learn.courses.course
-                                            .deleteCourse(data.record.id)
+                                            .deleteSection(data.record, courseId, data.record.id)
                                             .then(function () {
                                                 abp.notify.info(
                                                     l('SuccessfullyDeleted')
@@ -57,15 +53,7 @@ $(function () {
                     data: "title"
                 },
                 {
-                    title: l('Description'),
-                    data: "description"
-                },
-                {
-                    title: l('Number Of Lectures'),
-                    data: "numberOfLectures"
-                },
-                {
-                    title: l('VideoDuration'),
+                    title: l('Video Duration'),
                     data: "videoDurationInMinutes"
                 },
                 {
@@ -84,16 +72,19 @@ $(function () {
         })
     );
 
-    createModal.onResult(function () {
-        dataTable.ajax.reload();
-    });
-
     editModal.onResult(function () {
         dataTable.ajax.reload();
     });
 
-    $('#NewCourseButton').click(function (e) {
+    createModal.onResult(function () {
+        dataTable.ajax.reload();
+    });
+
+    $('#NewCourseSectionButton').click(function (e) {
         e.preventDefault();
-        createModal.open();
+        createModal.open({ courseId });
     });
 });
+
+
+

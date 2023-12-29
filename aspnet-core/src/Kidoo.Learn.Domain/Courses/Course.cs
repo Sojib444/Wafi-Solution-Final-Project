@@ -80,6 +80,22 @@ namespace Kidoo.Learn.Courses
             return this;
         }
 
+        public Course DeleteSection(
+            Guid sectionId,
+            [NotNull] string thumbnailUrl,
+            [NotNull] string title,
+            double videoDurationInMinutes,
+            int minAge,
+            int maxAge,
+            Guid courseId)
+        {
+            var section = GetSection(sectionId);
+
+            Sections.Remove(section);
+
+            return this;
+        }
+
         public Course AddTopic(
             Guid topicId,
             [NotNull] string title,

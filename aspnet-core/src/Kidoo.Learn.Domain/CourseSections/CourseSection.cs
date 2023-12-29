@@ -54,7 +54,6 @@ namespace Kidoo.Learn.CourseSections
             return this;
         }
 
-
         internal CourseSection AddTopic(
             Guid id,
             [NotNull] string title,
