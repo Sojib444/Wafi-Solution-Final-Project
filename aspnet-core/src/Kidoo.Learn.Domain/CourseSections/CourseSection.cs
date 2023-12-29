@@ -49,11 +49,10 @@ namespace Kidoo.Learn.CourseSections
             VideoDurationInMinutes = videoDurationInMinutes;
             MinAge = minAge;
             MaxAge = maxAge;
-            CourseId = courseId;
+            CourseId = Guid.Empty;
 
             return this;
         }
-
 
         internal CourseSection AddTopic(
             Guid id,

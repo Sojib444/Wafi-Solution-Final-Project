@@ -91,7 +91,7 @@ namespace Kidoo.Learn.Courses
         {
             var section = GetSection(sectionId);
 
-            section.UpdateSection(thumbnailUrl, title, videoDurationInMinutes, minAge, maxAge, courseId);
+            Sections.Remove(section);
 
             return this;
         }

@@ -11,7 +11,6 @@ using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
-using Volo.Abp.ObjectMapping;
 
 namespace Kidoo.Learn.Courses
 {
@@ -35,9 +34,9 @@ namespace Kidoo.Learn.Courses
 
             var course = await _courseManager.CreateCourseAsync(
                 input.ThumbnailUrl,
-                input.Title, 
+                input.Title,
                 input.Description,
-                input.NumberOfLectures, 
+                input.NumberOfLectures,
                 input.VideoDurationInMinutes);
 
             var result = await _courseRepository.InsertAsync(course);
@@ -60,7 +59,7 @@ namespace Kidoo.Learn.Courses
                 input.NumberOfLectures,
                 input.VideoDurationInMinutes);
 
-            await _courseRepository.UpdateAsync(entity,true);
+            await _courseRepository.UpdateAsync(entity, true);
 
             return ObjectMapper.Map<Course, CourseDto>(entity);
         }
@@ -81,7 +80,7 @@ namespace Kidoo.Learn.Courses
             if (entity == null)
                 throw new UserFriendlyException("Delete failed, Couldn't find the requested data.");
 
-            await _courseRepository.DeleteAsync(entity,true);
+            await _courseRepository.DeleteAsync(entity, true);
         }
 
         //Course Feature
@@ -93,7 +92,7 @@ namespace Kidoo.Learn.Courses
                 .Include(x => x.Sections)
                 .FirstOrDefaultAsync();
 
-            var courseSection = ObjectMapper.Map<ICollection<CourseSection>, List< CourseSectionDto>>(course.Sections);
+            var courseSection = ObjectMapper.Map<ICollection<CourseSection>, List<CourseSectionDto>>(course.Sections);
 
             if (course == null)
                 throw new BusinessException("Course couldn't found");
@@ -137,9 +136,34 @@ namespace Kidoo.Learn.Courses
             if (course == null)
                 throw new BusinessException("Course couldn't found");
 
-            course.UpdateSection(sectionId, input.ThumbnailUrl, input.Title, input.VideoDurationInMinutes, input.MinAge, input.MaxAge, courseId);
+            course.UpdateSection(sectionId,
+                input.ThumbnailUrl, 
+                input.Title, 
+                input.VideoDurationInMinutes,
+                input.MinAge, 
+                input.MaxAge,
+                courseId);
 
             await _courseRepository.UpdateAsync(course);
+        }
+
+        public async Task DeleteSectionAsync(CreateUpdateCourseSectionDto input, Guid courseId, Guid sectionId)
+        {
+            var course = await (await _courseRepository.GetQueryableAsync()).Where(x => x.Id == courseId)
+                                    .Include(x => x.Sections).FirstOrDefaultAsync();
+
+            if (course == null)
+                throw new BusinessException("Course couldn't found");
+
+            course.DeleteSection(sectionId,
+                input.ThumbnailUrl,
+                input.Title, 
+                input.VideoDurationInMinutes,
+                input.MinAge,
+                input.MaxAge, 
+                courseId);
+
+                await _courseRepository.UpdateAsync(course);            
         }
 
         public async Task AddTopicAsync(CreateUpdateCourseTopicDto input, Guid sectionId, Guid courseId)
