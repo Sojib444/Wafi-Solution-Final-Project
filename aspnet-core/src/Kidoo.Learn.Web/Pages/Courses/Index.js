@@ -26,7 +26,7 @@ $(function () {
                                 {
                                     text: l('Sections'),
                                     action: function (data) {
-                                        window.location.href = '/CourseSections?id=' + data.record.id + '&name=' + data.record.title;
+                                        window.location.href = '/CourseSections?courseid=' + data.record.id + '&name=' + data.record.title;
                                     }                                      
                                     
                                 },

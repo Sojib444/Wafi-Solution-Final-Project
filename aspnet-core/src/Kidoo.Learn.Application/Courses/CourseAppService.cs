@@ -11,6 +11,7 @@ using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
+using Volo.Abp.ObjectMapping;
 
 namespace Kidoo.Learn.Courses
 {
@@ -85,10 +86,8 @@ namespace Kidoo.Learn.Courses
 
         //Course Feature
         //Path: CourseAppService --> CourseManager --> Domain layer for UpdateCreateDomain
-        public async Task<PagedResultDto<CourseSectionDto>> GetCouresSectionsAsync(Guid courseId)
+        public async Task<PagedResultDto<CourseSectionDto>> GetCouresSectionsListAsync(Guid courseId)
         {
-            //var course = (await _courseRepository.FirstOrDefaultAsync(x => x.Id == courseId));
-
             var course = await (await _courseRepository.GetQueryableAsync())
                 .Where(x => x.Id == courseId)
                 .Include(x => x.Sections)
@@ -102,6 +101,18 @@ namespace Kidoo.Learn.Courses
             var totalCount = courseSection.Count();
 
             return new PagedResultDto<CourseSectionDto>(totalCount, courseSection);
+        }
+
+        public async Task<CourseSectionDto> GetCourseSectionAsync(Guid courseId, Guid sectionId)
+        {
+            var course = await (await _courseRepository.GetQueryableAsync())
+                            .Where(x => x.Id == courseId)
+                            .Include(x => x.Sections)
+                            .FirstOrDefaultAsync();
+
+            var courseSection = course.Sections.Where(x => x.Id == sectionId).FirstOrDefault();
+
+            return ObjectMapper.Map<CourseSection, CourseSectionDto>(courseSection);
         }
 
         public async Task AddSectionAsync(CreateUpdateCourseSectionDto input, Guid courseId)
@@ -122,6 +133,9 @@ namespace Kidoo.Learn.Courses
         {
             var course = await (await _courseRepository.GetQueryableAsync()).Where(x => x.Id == courseId)
                                     .Include(x => x.Sections).FirstOrDefaultAsync();
+
+            if (course == null)
+                throw new BusinessException("Course couldn't found");
 
             course.UpdateSection(sectionId, input.ThumbnailUrl, input.Title, input.VideoDurationInMinutes, input.MinAge, input.MaxAge, courseId);
 

@@ -6,8 +6,9 @@ namespace Kidoo.Learn.Web.Pages.CourseSections
 {
     public class IndexModel : PageModel
     {
+        [HiddenInput]
         [BindProperty(SupportsGet = true)]
-        public Guid Id { get; set; }
+        public Guid CourseId { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public string Name { get; set; }
