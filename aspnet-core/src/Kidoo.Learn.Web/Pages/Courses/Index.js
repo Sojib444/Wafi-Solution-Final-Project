@@ -8,7 +8,7 @@ $(function () {
         abp.libs.datatables.normalizeConfiguration({
             serverSide: true,
             paging: true,
-            searching: false,
+            searching: true,
             scrollX: true,
             ajax: abp.libs.datatables.createAjax(kidoo.learn.courses.course.getList),
             columnDefs: [ 
@@ -26,8 +26,9 @@ $(function () {
                                 {
                                     text: l('Sections'),
                                     action: function (data) {
-                                        sectionModal.open({ name: data.record.title, id: data.record.id });
-                                    }
+                                        window.location.href = '/CourseSections?id=' + data.record.id + '&name=' + data.record.title;
+                                    }                                      
+                                    
                                 },
                                 {
                                     text: l('Delete'),

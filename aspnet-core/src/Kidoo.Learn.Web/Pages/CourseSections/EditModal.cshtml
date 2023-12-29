@@ -1,19 +1,20 @@
 ﻿@page
 @using Kidoo.Learn.Localization
 @using Kidoo.Learn.Permissions
+@using Kidoo.Learn.Web.Pages.Students
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.Extensions.Localization
 @using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal;
 @inject IStringLocalizer<LearnResource> L
 @inject IAuthorizationService AuthorizationService
-@model Kidoo.Learn.Web.Pages.CourseSections.CreateModal
+@model Kidoo.Learn.Web.Pages.CourseSections.EditModal
 @{
     Layout = null;
 }
 
-<abp-dynamic-form abp-model="courseSection" asp-page="/CourseSections/CreateModal">
-    <abp-modal scrollable="true" size="Large">
-        <abp-modal-header title="@L["NewCourseSection"].Value"></abp-modal-header>
+<abp-dynamic-form abp-model="SectionDto" asp-page="/CourseSections/EditModal">
+    <abp-modal>
+        <abp-modal-header title="@L["UpdateSection"].Value"></abp-modal-header>
         <abp-modal-body>
             <abp-input asp-for="Id" />
             <abp-form-content />

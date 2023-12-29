@@ -1,18 +1,77 @@
+//$(function () {
+//    var l = abp.localization.getResource('Learn');
+//    var createModal = new abp.ModalManager(abp.appPath + 'CourseSections/CreateModal');
+//    var courseId = $('#CourseId').val();
+
+
+//    var dataTable = $('#CourseSectionsTable').DataTable(
+//        abp.libs.datatables.normalizeConfiguration({
+//            serverSide: true,
+//            paging: true,
+//            searching: false,
+//            scrollX: true,
+//            ajax: abp.libs.datatables.createAjax(function (data) {
+//                return kidoo.learn.courses.course.getCouresSections(courseId);
+//            }),
+//            columnDefs: [
+//                {
+//                    title: l('Actions'),
+//                    rowAction: {
+//                        items:
+//                            [
+//                                {
+//                                    text: l('Edit'),
+//                                    action: function (data) {
+//                                        console.log("Hi");
+//                                        //editModal.open({ id: data.record.id });
+//                                    }
+//                                }
+//                            ]
+//                    }
+//                },
+//                {
+//                    title: l('Title'),
+//                    data: "title"
+//                },
+//                {
+//                    title: l('Video Duration'),
+//                    data: "videoDurationInMinutes"
+//                },
+//                {
+//                    title: l('Min Age'),
+//                    data: "minAge"
+//                },
+//                {
+//                    title: l('Max Age'),
+//                    data: "maxAge"
+//                },
+//                {
+//                    title: l('Thumbnil Url'),
+//                    data: "thumbnailUrl"
+//                }
+//            ]
+//        })
+//    );
+
+//    $('#CourseSectionsTable').click(function (e) {
+//        e.preventDefault();
+//        createModal.open();
+//    });
+//});
+
 $(function () {
     var l = abp.localization.getResource('Learn');
-    var createModal = new abp.ModalManager(abp.appPath + 'CourseSections/CreateModal');
-    var editModal = new abp.ModalManager(abp.appPath + 'CourseSections/EditModal');
-    var courseId = $('#CourseId').val();
+    var createModal = new abp.ModalManager(abp.appPath + 'Courses/CreateModal');
+    var editModal = new abp.ModalManager(abp.appPath + 'Courses/EditModal');
+    var sectionModal = new abp.ModalManager(abp.appPath + 'CourseSections');
 
-    var dataTable = $('#CourseSectionsTable').DataTable(
+    var dataTable = $('#CoursesTable').DataTable(
         abp.libs.datatables.normalizeConfiguration({
             serverSide: true,
             paging: true,
             searching: false,
             scrollX: true,
-            ajax: abp.libs.datatables.createAjax(function (data) {
-                return kidoo.learn.courses.course.getCouresSections(courseId);
-            }),
+            ajax: abp.libs.datatables.createAjax(kidoo.learn.courses.course.getList),
             columnDefs: [
                 {
                     title: l('Actions'),
@@ -28,7 +87,8 @@ $(function () {
                                 {
                                     text: l('Sections'),
                                     action: function (data) {
-                                        sectionModal.open({ name: data.record.title, id: data.record.id });
+                                        window.location.href = '/CourseSections' + data.record.product.id;
+                                        //sectionModal.open({ name: data.record.title, id: data.record.id });
                                     }
                                 },
                                 {
@@ -58,7 +118,15 @@ $(function () {
                     data: "title"
                 },
                 {
-                    title: l('Video Duration'),
+                    title: l('Description'),
+                    data: "description"
+                },
+                {
+                    title: l('Number Of Lectures'),
+                    data: "numberOfLectures"
+                },
+                {
+                    title: l('VideoDuration'),
                     data: "videoDurationInMinutes"
                 },
                 {
@@ -85,8 +153,9 @@ $(function () {
         dataTable.ajax.reload();
     });
 
-    $('#NewCourseSectionButton').click(function (e) {
+    $('#NewCourseButton').click(function (e) {
         e.preventDefault();
-        createModal.open({ courseId: courseId });
+        createModal.open();
     });
 });
+

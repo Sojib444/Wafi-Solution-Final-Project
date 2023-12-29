@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using Volo.Abp.AspNetCore.Mvc.UI.RazorPages;
 
 namespace Kidoo.Learn.Web.Pages.Courses
 {
     [Authorize]
-    public class IndexModel : PageModel
+    public class IndexModel : AbpPageModel
     {
         public void OnGet()
         {

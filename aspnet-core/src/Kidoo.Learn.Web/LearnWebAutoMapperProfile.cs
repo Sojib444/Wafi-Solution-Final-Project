@@ -11,5 +11,6 @@ public class LearnWebAutoMapperProfile : Profile
         //Define your AutoMapper configuration here for the Web project.
         CreateMap<UpdateCourseDto, CourseDto>().ReverseMap();
         CreateMap<CourseSection, CreateUpdateCourseSectionDto>().ReverseMap();
+        CreateMap<CourseSection, CreateUpdateCourseSectionDto>().ReverseMap();
     }
 }
