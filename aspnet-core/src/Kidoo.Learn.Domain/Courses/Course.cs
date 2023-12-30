@@ -107,6 +107,7 @@ namespace Kidoo.Learn.Courses
             var section = GetSection(courseSectionId);
 
             section.AddTopic(topicId, title, videoDurationInMinutes, videoUrl, courseSectionId, thumbnailUrl);
+
             return this;
         }
 

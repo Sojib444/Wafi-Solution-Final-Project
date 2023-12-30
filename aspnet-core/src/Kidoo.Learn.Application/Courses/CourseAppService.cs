@@ -188,13 +188,28 @@ namespace Kidoo.Learn.Courses
                 .FirstOrDefaultAsync();
 
             var section = course.Sections.Where(x => x.Id == sectionId).FirstOrDefault();
-            var sectionTopic = section.Topics.Where(x => x.CourseSectionId == sectionId).ToList();
+            var sectionTopics = section.Topics.Where(x => x.CourseSectionId == sectionId).ToList();
 
-            var courseTopicDto = ObjectMapper.Map<IEnumerable<CourseTopic>, List<CourseTopicDto>>(sectionTopic);
+            var courseTopicsDto = ObjectMapper.Map<IEnumerable<CourseTopic>, List<CourseTopicDto>>(sectionTopics);
 
-            var totalTopicCount = courseTopicDto.Count();
+            var totalTopicCount = courseTopicsDto.Count();
 
-            return new PagedResultDto<CourseTopicDto>(totalTopicCount, courseTopicDto);
+            return new PagedResultDto<CourseTopicDto>(totalTopicCount, courseTopicsDto);
+        }
+
+        public async Task<CourseTopicDto> GetCourseSectionTopicAsync(Guid courseId, Guid sectionId, Guid topicId)
+        {
+            var course = await(await _courseRepository.GetQueryableAsync())
+                .Where(x => x.Id == courseId)
+                .Include(x => x.Sections)
+                .ThenInclude(x => x.Topics)
+                .FirstOrDefaultAsync();
+
+            var section = course.Sections.Where(x => x.Id == sectionId).FirstOrDefault();
+            var sectionTopics = section.Topics.Where(x => x.CourseSectionId == sectionId).ToList();
+            var topic = sectionTopics.Where(x=> x.Id == topicId).FirstOrDefault();
+
+            return ObjectMapper.Map<CourseTopic, CourseTopicDto>(topic);
         }
 
         public async Task AddTopicAsync(CreateUpdateCourseTopicDto input, Guid sectionId, Guid courseId)

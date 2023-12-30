@@ -1,9 +1,9 @@
 $(function () {
     var l = abp.localization.getResource('Learn');
-    //var createModal = new abp.ModalManager(abp.appPath + 'CourseSections/CreateModal');
+    var createModal = new abp.ModalManager(abp.appPath + 'CourseSectionTopics/CreateModal');
     //var editModal = new abp.ModalManager(abp.appPath + 'CourseSections/EditModal');
     var courseId = $('#CourseId').val();
-    var secttionId = $('#SectionId').val();
+    var sectionId = $('#SectionId').val();
     console.log(courseId);
 
 
@@ -14,7 +14,7 @@ $(function () {
             searching: true,
             scrollX: true,
             ajax: abp.libs.datatables.createAjax(function (data) {
-                return kidoo.learn.courses.course.getCourseSectionTopicList(courseId, secttionId);
+                return kidoo.learn.courses.course.getCourseSectionTopicList(courseId, sectionId);
             }),
             columnDefs: [
                 {
@@ -74,12 +74,12 @@ $(function () {
     //    dataTable.ajax.reload();
     //});
 
-    //createModal.onResult(function () {
-    //    dataTable.ajax.reload();
-    //});
+    createModal.onResult(function () {
+        dataTable.ajax.reload();
+    });
 
     $('#NewCourseSectionTopicButton').click(function (e) {
         e.preventDefault();
-        createModal.open({ courseId });
+        createModal.open({ courseId, sectionId });
     });
 });

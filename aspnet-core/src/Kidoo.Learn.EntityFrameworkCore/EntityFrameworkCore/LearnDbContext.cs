@@ -176,7 +176,7 @@ public class LearnDbContext :
             b.ToTable(LearnConsts.DbTablePrefix + "CourseTopics", LearnConsts.DbSchema);
             b.ConfigureByConvention();
 
-            b.Property(x => x.Title).HasMaxLength(CourseSectionTopic.MaxTitleLength).IsRequired();
+            b.Property(x => x.Title).HasMaxLength(CourseSectionTopicConsts.MaxTitleLength).IsRequired();
             b.Property(x => x.ThumbnailUrl).IsRequired();
         });        
         

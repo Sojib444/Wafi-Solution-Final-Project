@@ -89,7 +89,7 @@ $(function () {
 
     $('#NewCourseSectionButton').click(function (e) {
         e.preventDefault();
-        createModal.open({ courseId });
+        createModal.open({ courseId});
     });
 });
 
