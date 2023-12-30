@@ -79,6 +79,22 @@ namespace Kidoo.Learn.CourseSections
             var topic = Topics.FirstOrDefault(t => t.Id == topicId);
 
             topic.UpdateTopic(title, videoDurationInMinutes, videoUrl, courseSectionId, thumbnailUrl);
+
+            return this;
+        }
+
+        public CourseSection DeleteTopic(
+            Guid topicId,
+            [NotNull] string title,
+            double videoDurationInMinutes,
+            [NotNull] string videoUrl,
+            Guid courseSectionId,
+            [NotNull] string thumbnailUrl)
+        {
+            var topic = Topics.FirstOrDefault(t => t.Id == topicId);
+
+            Topics.Remove(topic);
+
             return this;
         }
     }

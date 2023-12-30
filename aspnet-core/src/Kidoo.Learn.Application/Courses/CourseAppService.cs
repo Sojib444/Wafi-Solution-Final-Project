@@ -233,5 +233,21 @@ namespace Kidoo.Learn.Courses
 
             await _courseRepository.UpdateAsync(course);
         }
+
+        public async Task DeleteTopicAsync(CreateUpdateCourseTopicDto input, Guid courseId, Guid sectionId, Guid topicId)
+        {
+            var course = await (await _courseRepository.GetQueryableAsync())
+                .Where(x => x.Id == courseId)
+                .Include(x => x.Sections)
+                .ThenInclude(x => x.Topics)
+                .FirstOrDefaultAsync();
+
+            var section = course.Sections.Where(x => x.Id == sectionId).FirstOrDefault();
+
+            section.DeleteTopic(topicId,input.Title,input.VideoDurationInMinutes,input.VideoUrl,sectionId, input.ThumbnailUrl);
+
+            await _courseRepository.UpdateAsync(course);
+        }
+
     }
 }
