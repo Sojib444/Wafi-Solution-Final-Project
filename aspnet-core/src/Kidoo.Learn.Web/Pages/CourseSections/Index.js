@@ -28,6 +28,13 @@ $(function () {
                                     }
                                 },
                                 {
+                                    text: l('Topics'),
+                                    action: function (data) {
+                                        console.log("topics");
+                                        window.location.href = '/CourseSectionTopics?sectionid=' + data.record.id + '&sectionname=' + data.record.title;
+                                    }
+                                },
+                                {
                                     text: l('Delete'),
                                     confirmMessage: function (data) {
                                         return l(
