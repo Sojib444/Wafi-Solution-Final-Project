@@ -10,7 +10,6 @@ namespace Kidoo.Learn.Courses
 { 
     public class Course : FullAuditedAggregateRoot<Guid>  
     {
-        public string ThumbnailUrl { get; private set; } 
         public string Title { get; private set; }
         public string Description { get; private set; }
         public int NumberOfLectures { get; private set; }
@@ -18,40 +17,62 @@ namespace Kidoo.Learn.Courses
         public int MinAge { get; private set; }
         public int MaxAge { get; private set; }
         public ICollection<CourseSection> Sections { get; private set; }
+
+        //for file 
+        public string ThumbnailFileName { get; private set; }
+        public string ThumbnailFileType { get; private set; }
+        public byte[] ThumbnailFileContent { get; private set; }
+
         private Course() { }
         public Course(
             Guid id,
-            [NotNull] string thumbnailUrl,
+            [NotNull] string thumbnailFileName,
+            [NotNull] string thumbnailFileType,
+            [NotNull] byte[] thumbnailFileContent,
             [NotNull] string title,
             [NotNull] string description,
             int numberOfLectures,
             double videoDurationInMinutes) : base(id)
         {
-            ThumbnailUrl = thumbnailUrl;
             Title = title;
             Description = description;
             NumberOfLectures = numberOfLectures;
             VideoDurationInMinutes = videoDurationInMinutes;
+
+            // Initialize file-related properties
+            ThumbnailFileName = thumbnailFileName;
+            ThumbnailFileType = thumbnailFileType;
+            ThumbnailFileContent = thumbnailFileContent;
+
         }
 
         public Course Update(
-            [NotNull] string thumbnailUrl,
+            [NotNull] string thumbnailFileName,
+            [NotNull] string thumbnailFileType,
+            [NotNull] byte[] thumbnailFileContent,
             [NotNull] string title,
             [NotNull] string description,
             [NotNull] int numberOfLectures,
             [NotNull] double videoDurationInMinutes) 
-        {
-            ThumbnailUrl = thumbnailUrl;
+        {            
             Title = title;
             Description = description;
             NumberOfLectures = numberOfLectures;
             VideoDurationInMinutes = videoDurationInMinutes;
+
+            // Initialize file-related properties
+            ThumbnailFileName = thumbnailFileName;
+            ThumbnailFileType = thumbnailFileType;
+            ThumbnailFileContent =thumbnailFileContent;
+
             return this;
         }
 
         internal Course AddSection(
             Guid id,
-            [NotNull] string thumbnailUrl,
+            [NotNull] string thumbnailFileName,
+            [NotNull] string thumbnailFileType,
+            [NotNull] byte[] thumbnailFileContent,
             [NotNull] string title,
             double videoDurationInMinutes,
             int minAge,
@@ -59,14 +80,23 @@ namespace Kidoo.Learn.Courses
             Guid courseId)
         {
 
-            Sections.Add(new CourseSection(id, thumbnailUrl, title, videoDurationInMinutes, minAge, maxAge, courseId));
+            Sections.Add(new CourseSection(
+                id, 
+                thumbnailFileName,
+                thumbnailFileType,
+                thumbnailFileContent, 
+                title, 
+                videoDurationInMinutes, 
+                minAge,maxAge, courseId));
 
             return this;
         }
 
         public Course UpdateSection(
             Guid sectionId,
-            [NotNull] string thumbnailUrl,
+            [NotNull] string thumbnailFileName,
+            [NotNull] string thumbnailFileType,
+            [NotNull] byte[] thumbnailFileContent,
             [NotNull] string title,
             double videoDurationInMinutes,
             int minAge,
@@ -75,14 +105,16 @@ namespace Kidoo.Learn.Courses
         {
             var section = GetSection(sectionId);
 
-            section.UpdateSection(thumbnailUrl, title, videoDurationInMinutes, minAge, maxAge, courseId);
+            section.UpdateSection(thumbnailFileName,thumbnailFileType,thumbnailFileContent, title, videoDurationInMinutes, minAge, maxAge, courseId);
 
             return this;
         }
 
         public Course DeleteSection(
             Guid sectionId,
-            [NotNull] string thumbnailUrl,
+            [NotNull] string thumbnailFileName,
+            [NotNull] string thumbnailFileType,
+            [NotNull] byte[] thumbnailFileContent,
             [NotNull] string title,
             double videoDurationInMinutes,
             int minAge,
@@ -100,13 +132,27 @@ namespace Kidoo.Learn.Courses
             Guid topicId,
             [NotNull] string title,
             double videoDurationInMinutes,
-            [NotNull] string videoUrl,
+            [NotNull] string videoFileName,
+            [NotNull] string videoFileType,
+            [NotNull] byte[] videoFileContent,
             Guid courseSectionId,
-            [NotNull] string thumbnailUrl)
+            [NotNull] string thumbnailFileName,
+            [NotNull] string thumbnailFileType,
+            [NotNull] byte[] thumbnailFileContent)
         {
             var section = GetSection(courseSectionId);
 
-            section.AddTopic(topicId, title, videoDurationInMinutes, videoUrl, courseSectionId, thumbnailUrl);
+            section.AddTopic(
+                topicId, 
+                title, 
+                videoDurationInMinutes,
+                videoFileName,
+                videoFileType,
+                videoFileContent,
+                courseSectionId,
+                thumbnailFileName,
+                thumbnailFileType,
+                thumbnailFileContent);
 
             return this;
         }
@@ -115,13 +161,26 @@ namespace Kidoo.Learn.Courses
             Guid topicId,
             [NotNull] string title,
             double videoDurationInMinutes,
-            [NotNull] string videoUrl,
+            [NotNull] string videoFileName,
+            [NotNull] string videoFileType,
+            [NotNull] byte[] videoFileContent,
             Guid courseSectionId,
-            [NotNull] string thumbnailUrl)
+            [NotNull] string thumbnailFileName,
+            [NotNull] string thumbnailFileType,
+            [NotNull] byte[] thumbnailFileContent)
         {
             var section = GetSection(courseSectionId);
 
-            section.UpdateTopic(topicId, title, videoDurationInMinutes, videoUrl, courseSectionId, thumbnailUrl);
+            section.UpdateTopic(topicId,
+                title, 
+                videoDurationInMinutes,
+                videoFileName,
+                videoFileType,
+                videoFileContent,
+                courseSectionId,
+                thumbnailFileName,
+                thumbnailFileType,
+                thumbnailFileContent);
 
             return this;
         }

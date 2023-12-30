@@ -1,12 +1,12 @@
 ﻿using Kidoo.Learn.Consts.Section;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
 namespace Kidoo.Learn.CourseSections
 {
     public class CreateUpdateCourseSectionDto
     {
-        [Required(ErrorMessage = "Thumbnil is required")]
-        public string ThumbnailUrl { get; set; }
+        public IFormFile File { get; set; }
 
         [Required]
         [StringLength(CourseSectionConsts.MaxTitleLength, ErrorMessage = "Title is can't exceed {1} charater")]

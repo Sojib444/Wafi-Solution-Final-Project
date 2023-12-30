@@ -13,8 +13,8 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Kidoo.Learn.Migrations
 {
     [DbContext(typeof(LearnDbContext))]
-    [Migration("20231230042626_Addding_CourseSectionTopic")]
-    partial class Addding_CourseSectionTopic
+    [Migration("20231230163210_File_Adding_1.2")]
+    partial class File_Adding_12
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,13 +42,10 @@ namespace Kidoo.Learn.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ThumbnailUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("VideoDurationInMinutes")
                         .HasColumnType("float");
@@ -57,7 +54,7 @@ namespace Kidoo.Learn.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("KidooCourseSections", (string)null);
+                    b.ToTable("CourseSections");
                 });
 
             modelBuilder.Entity("Kidoo.Learn.CourseTopics.CourseTopic", b =>
@@ -69,13 +66,10 @@ namespace Kidoo.Learn.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ThumbnailUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("VideoDurationInMinutes")
                         .HasColumnType("float");
@@ -87,7 +81,7 @@ namespace Kidoo.Learn.Migrations
 
                     b.HasIndex("CourseSectionId");
 
-                    b.ToTable("KidooCourseTopics", (string)null);
+                    b.ToTable("CourseTopics");
                 });
 
             modelBuilder.Entity("Kidoo.Learn.Courses.Course", b =>
@@ -149,7 +143,15 @@ namespace Kidoo.Learn.Migrations
                     b.Property<int>("NumberOfLectures")
                         .HasColumnType("int");
 
-                    b.Property<string>("ThumbnailUrl")
+                    b.Property<byte[]>("ThumbnailFileContent")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ThumbnailFileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ThumbnailFileType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

@@ -4,6 +4,7 @@ using Kidoo.Learn.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -12,9 +13,11 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Kidoo.Learn.Migrations
 {
     [DbContext(typeof(LearnDbContext))]
-    partial class LearnDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231230163011_File_Adding_1.1")]
+    partial class File_Adding_11
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,13 +41,7 @@ namespace Kidoo.Learn.Migrations
                     b.Property<int>("MinAge")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("ThumbnailFileContent")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("ThumbnailFileName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ThumbnailFileType")
+                    b.Property<string>("ThumbnailUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
@@ -68,13 +65,7 @@ namespace Kidoo.Learn.Migrations
                     b.Property<Guid>("CourseSectionId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<byte[]>("ThumbnailFileContent")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("ThumbnailFileName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ThumbnailFileType")
+                    b.Property<string>("ThumbnailUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
@@ -83,13 +74,7 @@ namespace Kidoo.Learn.Migrations
                     b.Property<double>("VideoDurationInMinutes")
                         .HasColumnType("float");
 
-                    b.Property<byte[]>("VideoFileContent")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("VideoFileName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VideoFileType")
+                    b.Property<string>("VideoUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

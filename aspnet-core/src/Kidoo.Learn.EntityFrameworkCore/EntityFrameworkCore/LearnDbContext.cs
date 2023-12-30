@@ -1,13 +1,11 @@
 ﻿using Kidoo.Learn.Consts;
 using Kidoo.Learn.Consts.Course;
-using Kidoo.Learn.Consts.Section;
-using Kidoo.Learn.Consts.Topic;
 using Kidoo.Learn.Courses;
 using Kidoo.Learn.CourseSections;
 using Kidoo.Learn.CourseTopics;
 using Kidoo.Learn.Files;
 using Kidoo.Learn.Instructors;
-using Kidoo.Learn.Questions; 
+using Kidoo.Learn.Questions;
 using Kidoo.Learn.Students;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
@@ -19,7 +17,7 @@ using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
-using Volo.Abp.OpenIddict.EntityFrameworkCore; 
+using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
@@ -69,14 +67,14 @@ public class LearnDbContext :
     public DbSet<Course> Courses { get; set; }
     public DbSet<CourseSection> CourseSections { get; set; }
     public DbSet<CourseTopic> CourseTopics { get; set; }
-    
+
     public DbSet<Instructor> Instructors { get; set; }
     public DbSet<Question> Questions { get; set; }
     public DbSet<QuestionOption> QuestionOptions { get; set; }
     public DbSet<Student> Students { get; set; }
     public DbSet<KidooFile> KidooFiles { get; set; }
-    #endregion 
-    
+    #endregion
+
 
     public LearnDbContext(DbContextOptions<LearnDbContext> options)
         : base(options)
@@ -101,7 +99,7 @@ public class LearnDbContext :
 
         /* Configure your own tables/entities inside here */
 
-      
+
 
         builder.Entity<Instructor>(b =>
         {
@@ -131,12 +129,12 @@ public class LearnDbContext :
         builder.Entity<QuestionOption>(b =>
         {
             b.ToTable(LearnConsts.DbTablePrefix + "QuestionOptions", LearnConsts.DbSchema);
-            b.ConfigureByConvention(); 
+            b.ConfigureByConvention();
             b.Property(x => x.OptionText).HasMaxLength(QuestionOptionConsts.MaxOptionTextLength).IsRequired();
 
         });
 
-      
+
 
         builder.Entity<Student>(b =>
         {
@@ -159,27 +157,23 @@ public class LearnDbContext :
 
             b.Property(x => x.Title).HasMaxLength(CourseConsts.MaxTitleLength).IsRequired();
             b.Property(x => x.Description).HasMaxLength(CourseConsts.MaxDescriptionLength).IsRequired();
-            b.Property(x => x.ThumbnailUrl).IsRequired();
+            b.Property(x => x.ThumbnailFileName).IsRequired();
+            b.Property(x => x.ThumbnailFileContent).IsRequired();
+            b.Property(x => x.ThumbnailFileType).IsRequired();
         });
 
         builder.Entity<CourseSection>(b =>
         {
             b.ToTable(LearnConsts.DbTablePrefix + "CourseSections", LearnConsts.DbSchema);
             b.ConfigureByConvention();
-
-            b.Property(x => x.Title).HasMaxLength(CourseSectionConsts.MaxTitleLength).IsRequired();
-            b.Property(x => x.ThumbnailUrl).IsRequired();
         });
 
         builder.Entity<CourseTopic>(b =>
         {
             b.ToTable(LearnConsts.DbTablePrefix + "CourseTopics", LearnConsts.DbSchema);
             b.ConfigureByConvention();
+        });
 
-            b.Property(x => x.Title).HasMaxLength(CourseSectionTopicConsts.MaxTitleLength).IsRequired();
-            b.Property(x => x.ThumbnailUrl).IsRequired();
-        });        
-        
         builder.Entity<KidooFile>(b =>
         {
             b.ToTable(LearnConsts.DbTablePrefix + "Files", LearnConsts.DbSchema);

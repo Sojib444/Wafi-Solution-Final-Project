@@ -13,8 +13,8 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Kidoo.Learn.Migrations
 {
     [DbContext(typeof(LearnDbContext))]
-    [Migration("20231226023803_inital")]
-    partial class inital
+    [Migration("20231230174942_Add-CourseSection")]
+    partial class AddCourseSection
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,7 +41,13 @@ namespace Kidoo.Learn.Migrations
                     b.Property<int>("MinAge")
                         .HasColumnType("int");
 
-                    b.Property<string>("ThumbnailUrl")
+                    b.Property<byte[]>("ThumbnailFileContent")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ThumbnailFileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ThumbnailFileType")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
@@ -81,7 +87,7 @@ namespace Kidoo.Learn.Migrations
 
                     b.HasIndex("CourseSectionId");
 
-                    b.ToTable("KidooCourseTopics", (string)null);
+                    b.ToTable("CourseTopic");
                 });
 
             modelBuilder.Entity("Kidoo.Learn.Courses.Course", b =>
@@ -112,7 +118,9 @@ namespace Kidoo.Learn.Migrations
                         .HasColumnName("DeletionTime");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("ExtraProperties")
                         .HasColumnType("nvarchar(max)")
@@ -141,11 +149,22 @@ namespace Kidoo.Learn.Migrations
                     b.Property<int>("NumberOfLectures")
                         .HasColumnType("int");
 
-                    b.Property<string>("ThumbnailUrl")
+                    b.Property<byte[]>("ThumbnailFileContent")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ThumbnailFileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ThumbnailFileType")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<double>("VideoDurationInMinutes")
                         .HasColumnType("float");

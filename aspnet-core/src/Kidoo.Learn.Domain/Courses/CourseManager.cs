@@ -19,13 +19,14 @@ namespace Kidoo.Learn.Courses
         }
 
         public async Task<Course> CreateCourseAsync(
-            [NotNull] string thumbnailUrl,
+            [NotNull] string thumbnailFileName,
+            [NotNull] string thumbnailFileType,
+            [NotNull] byte[] thumbnailFileContent,
             [NotNull] string title,
             [NotNull] string description,
             int numberOfLectures,
             double videoDurationInMinutes)
         {
-            Check.NotNullOrWhiteSpace(thumbnailUrl, nameof(thumbnailUrl));
             Check.NotNullOrWhiteSpace(title, nameof(title));
             Check.NotNullOrWhiteSpace(description, nameof(description));
 
@@ -35,7 +36,9 @@ namespace Kidoo.Learn.Courses
 
             return new Course(
                 GuidGenerator.Create(),
-                thumbnailUrl,
+                thumbnailFileName,
+                thumbnailFileType,
+                thumbnailFileContent,
                 title,
                 description,
                 numberOfLectures,
@@ -43,20 +46,24 @@ namespace Kidoo.Learn.Courses
         }
 
         public async Task<Course> UpdateCourseAsync(Course course,
-            [NotNull] string thumbnailUrl,
+            [NotNull] string thumbnailFileName,
+            [NotNull] string thumbnailFileType,
+            [NotNull] byte[] thumbnailFileContent,
             [NotNull] string title,
             [NotNull] string description,
             int numberOfLectures,
             double videoDurationInMinutes)
         {
-            return course.Update(thumbnailUrl, title, description, numberOfLectures, videoDurationInMinutes);
+            return course.Update(thumbnailFileName,thumbnailFileType,thumbnailFileContent, title, description, numberOfLectures, videoDurationInMinutes);
         }
 
         public async Task AddSectionAsync(Course course, CreateUpdateCourseSectionDomainDto courseSectionDomainDto, Guid courseId)
         {
             course.AddSection(
                 GuidGenerator.Create(),
-                courseSectionDomainDto.ThumbnailUrl,
+                courseSectionDomainDto.ThumbnailFileName,
+                courseSectionDomainDto.ThumbnailFileType,
+                courseSectionDomainDto.ThumbnailFileContent,
                 courseSectionDomainDto.Title,
                 courseSectionDomainDto.VideoDurationInMinutes,
                 courseSectionDomainDto.MinAge,
@@ -74,9 +81,13 @@ namespace Kidoo.Learn.Courses
                 GuidGenerator.Create(),
                 courseTopicDomainDto.Title,
                 courseTopicDomainDto.VideoDurationInMinutes,
-                courseTopicDomainDto.VideoUrl,
+                courseTopicDomainDto.VideoFileName,
+                courseTopicDomainDto.VideoFileType,
+                courseTopicDomainDto.VideoFileContent,
                 sectionId,
-                courseTopicDomainDto.ThumbnailUrl
+                courseTopicDomainDto.ThumbnailFileName,
+                courseTopicDomainDto.ThumbnailFileType,
+                courseTopicDomainDto.ThumbnailFileContent
             );
         }
     }

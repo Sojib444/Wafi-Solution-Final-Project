@@ -10,13 +10,17 @@ namespace Kidoo.Learn.Courses
     public interface ICourseManager : IDomainService
     {
         Task<Course> CreateCourseAsync(
-            [NotNull] string thumbnailUrl,
+            [NotNull] string thumbnailFileName,
+            [NotNull] string thumbnailFileType,
+            [NotNull] byte[] thumbnailFileContent,
             [NotNull] string title,
             [NotNull] string description,
             int numberOfLectures,
             double videoDurationInMinutes);
         Task<Course> UpdateCourseAsync(Course course,
-            [NotNull] string thumbnailUrl,
+            [NotNull] string thumbnailFileName,
+            [NotNull] string thumbnailFileType,
+            [NotNull] byte[] thumbnailFileContent,
             [NotNull] string title,
             [NotNull] string description,
             int numberOfLectures,

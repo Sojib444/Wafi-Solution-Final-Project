@@ -43,7 +43,9 @@ namespace Kidoo.Learn.Courses
                 throw new BusinessException($"Course already exist with '{input.Title}' title");
 
             var course = await _courseManager.CreateCourseAsync(
-                input.ThumbnailUrl,
+                input.Thumbnail.FileName,
+                input.Thumbnail.ContentType,
+                input.Thumbnail.ContentDisposition.GetBytes(),
                 input.Title,
                 input.Description,
                 input.NumberOfLectures,
@@ -63,7 +65,9 @@ namespace Kidoo.Learn.Courses
 
             await _courseManager.UpdateCourseAsync(
                 entity,
-                input.ThumbnailUrl,
+                input.Thummbnail.FileName,
+                input.Thummbnail.ContentType,
+                input.Thummbnail.ContentDisposition.GetBytes(),
                 input.Title,
                 input.Description,
                 input.NumberOfLectures,
@@ -148,7 +152,9 @@ namespace Kidoo.Learn.Courses
                 throw new BusinessException("Course couldn't found");
 
             course.UpdateSection(sectionId,
-                input.ThumbnailUrl, 
+                input.File.FileName,
+                input.File.ContentType,
+                input.File.ContentDisposition.GetBytes(),
                 input.Title, 
                 input.VideoDurationInMinutes,
                 input.MinAge, 
@@ -167,7 +173,9 @@ namespace Kidoo.Learn.Courses
                 throw new BusinessException("Course couldn't found");
 
             course.DeleteSection(sectionId,
-                input.ThumbnailUrl,
+                input.File.FileName,
+                input.File.ContentType,
+                input.File.ContentDisposition.GetBytes(),
                 input.Title, 
                 input.VideoDurationInMinutes,
                 input.MinAge,
@@ -229,7 +237,17 @@ namespace Kidoo.Learn.Courses
             var course = await (await _courseRepository.GetQueryableAsync()).Where(x => x.Id == courseId)
                                     .Include(x => x.Sections).ThenInclude(x => x.Topics).FirstOrDefaultAsync();
 
-            course.UpdateTopic(topicId, input.Title, input.VideoDurationInMinutes, input.VideoUrl, sectionId, input.ThumbnailUrl);
+            course.UpdateTopic(
+                topicId,
+                input.Title,
+                input.VideoDurationInMinutes,
+                input.Video.FileName,
+                input.Video.ContentType,
+                input.Video.ContentDisposition.GetBytes(),
+                sectionId,
+                input.Thumbnail.FileName,
+                input.Thumbnail.ContentType,
+                input.Thumbnail.ContentDisposition.GetBytes());
 
             await _courseRepository.UpdateAsync(course);
         }
@@ -244,7 +262,17 @@ namespace Kidoo.Learn.Courses
 
             var section = course.Sections.Where(x => x.Id == sectionId).FirstOrDefault();
 
-            section.DeleteTopic(topicId,input.Title,input.VideoDurationInMinutes,input.VideoUrl,sectionId, input.ThumbnailUrl);
+            section.DeleteTopic(
+                topicId,
+                input.Title,
+                input.VideoDurationInMinutes,
+                input.Thumbnail.FileName,
+                input.Thumbnail.ContentType,
+                input.Thumbnail.ContentDisposition.GetBytes(),
+                sectionId,
+                input.Video.FileName,
+                input.Video.ContentType,
+                input.Video.ContentDisposition.GetBytes());
 
             await _courseRepository.UpdateAsync(course);
         }

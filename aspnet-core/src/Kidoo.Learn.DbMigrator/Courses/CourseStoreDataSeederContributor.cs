@@ -1,5 +1,6 @@
 ﻿using Kidoo.Learn.Courses;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
@@ -21,17 +22,18 @@ namespace Kidoo.Learn.DbMigrator.Courses
             {
                 await _courseRepository.InsertAsync(new Course(
                     Guid.NewGuid(),
-                    "www.youtube.com", 
+                    "sojib.jpg",
+                    ".jpg",
+                    GetFileContent("C:/Users/Tafsir Computer/Desktop/sojib.jpg"),
                     "C#",
                     "Devskill Course",
-                    20, 200));
+                    20, 
+                    200));
 
-                await _courseRepository.InsertAsync(new Course(
-                    Guid.NewGuid(),
-                    "www.youtube.com",
-                    "C++",
-                    "Wafi Course",
-                    20, 200));
+                byte[] GetFileContent(string filePath)
+                {
+                    return File.ReadAllBytes(filePath);
+                }
             }
         }
     }

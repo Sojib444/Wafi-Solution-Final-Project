@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Kidoo.Learn.Migrations
 {
     /// <inheritdoc />
-    public partial class inital : Migration
+    public partial class File_Adding : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -375,13 +375,15 @@ namespace Kidoo.Learn.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ThumbnailUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     NumberOfLectures = table.Column<int>(type: "int", nullable: false),
                     VideoDurationInMinutes = table.Column<double>(type: "float", nullable: false),
                     MinAge = table.Column<int>(type: "int", nullable: false),
                     MaxAge = table.Column<int>(type: "int", nullable: false),
+                    ThumbnailFileName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ThumbnailFileType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ThumbnailFileContent = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -810,8 +812,8 @@ namespace Kidoo.Learn.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ThumbnailUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ThumbnailUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     VideoDurationInMinutes = table.Column<double>(type: "float", nullable: false),
                     MinAge = table.Column<int>(type: "int", nullable: false),
                     MaxAge = table.Column<int>(type: "int", nullable: false),
@@ -908,8 +910,8 @@ namespace Kidoo.Learn.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ThumbnailUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ThumbnailUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     VideoDurationInMinutes = table.Column<double>(type: "float", nullable: false),
                     VideoUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CourseSectionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)

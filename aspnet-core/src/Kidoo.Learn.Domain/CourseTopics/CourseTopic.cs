@@ -7,40 +7,67 @@ namespace Kidoo.Learn.CourseTopics
 {
     public class CourseTopic : Entity<Guid>
     {
-        public string ThumbnailUrl { get; private set; }
         public string Title { get; private set; }
         public double VideoDurationInMinutes { get; private set; }
-        public string VideoUrl { get; private set; }
         public Guid CourseSectionId { get; private set; }
         public CourseSection CourseSection { get; private set; }
+
+        //for file 
+        public string ThumbnailFileName { get; private set; }
+        public string ThumbnailFileType { get; private set; }
+        public byte[] ThumbnailFileContent { get; private set; }
+
+        //for file 
+        public string VideoFileName { get; private set; }
+        public string VideoFileType { get; private set; }
+        public byte[] VideoFileContent { get; private set; }
+
+
         private CourseTopic() { }
         public CourseTopic(
             Guid id,
             [NotNull] string title,
             double videoDurationInMinutes,
-            [NotNull] string videoUrl,
+            [NotNull] string thumbnailFileName,
+            [NotNull] string thumbnailFileType,
+            [NotNull] byte[] thumbnailFileContent,
             Guid courseSectionId,
-            [NotNull] string thumbnailUrl) : base(id)
+            [NotNull] string videoFileName,
+            [NotNull] string videoFileType,
+            [NotNull] byte[] videoFileContent) : base(id)
         {
-            ThumbnailUrl = thumbnailUrl;
+            ThumbnailFileName = thumbnailFileName;
+            ThumbnailFileType = thumbnailFileType;
+            ThumbnailFileContent = thumbnailFileContent;
             Title = title;
             VideoDurationInMinutes = videoDurationInMinutes;
             CourseSectionId = courseSectionId;
-            VideoUrl = videoUrl;
+            VideoFileName = videoFileName;
+            VideoFileType = videoFileType;
+            VideoFileContent = videoFileContent;
         }
 
         public CourseTopic UpdateTopic(
             [NotNull] string title,
             double videoDurationInMinutes,
-            [NotNull] string videoUrl,
+            [NotNull] string videoFileName,
+            [NotNull] string videoFileType,
+            [NotNull] byte[] videoFileContent,
             Guid courseSectionId,
-            [NotNull] string thumbnailUrl)
+            [NotNull] string thumbnailFileName,
+            [NotNull] string thumbnailFileType,
+            [NotNull] byte[] thumbnailFileContent)
         {
             Title = title;
             VideoDurationInMinutes = videoDurationInMinutes;
-            VideoUrl = videoUrl;
             CourseSectionId = courseSectionId;
-            ThumbnailUrl = thumbnailUrl;
+            VideoFileName = videoFileName;
+            VideoFileType = videoFileType;
+            VideoFileContent = videoFileContent;
+            CourseSectionId = courseSectionId;
+            ThumbnailFileName = thumbnailFileName;
+            ThumbnailFileType = thumbnailFileType;
+            ThumbnailFileContent = thumbnailFileContent;
 
             return this;
         }
