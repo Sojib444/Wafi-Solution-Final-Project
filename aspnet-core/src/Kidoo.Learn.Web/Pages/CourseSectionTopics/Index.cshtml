@@ -13,7 +13,7 @@
 }
 
 @section scripts {
-    <abp-script src="/Pages/CourseSectionsTopics/Index.js" />
+    <abp-script src="/Pages/CourseSectionTopics/Index.js" />
 }
 
 <abp-card>
@@ -23,8 +23,8 @@
                 <abp-card-title>@Model.SectionName @L["Topics"]</abp-card-title>
             </abp-column>
             <abp-column size-md="_6" class="text-end">
-                <abp-button id="NewCourseSectionButton"
-                            text="@L["Add NewCourseSection"].Value"
+                <abp-button id="NewCourseSectionTopicButton"
+                            text="@L["Add NewCourseSectionTopic"].Value"
                             icon="plus"
                             button-type="Primary" />
             </abp-column>
@@ -32,6 +32,7 @@
     </abp-card-header>
     <abp-card-body>
         <abp-input id="SectionId" asp-for="SectionId" />
-        <abp-table striped-rows="true" id="CourseSectionsTable"></abp-table>
+        <abp-input id="CourseId" asp-for="CourseId" />
+        <abp-table striped-rows="true" id="CourseSectionTopicTable"></abp-table>
     </abp-card-body>
 </abp-card>

@@ -24,6 +24,7 @@ namespace Kidoo.Learn.Courses
         Task DeleteSectionAsync(CreateUpdateCourseSectionDto input, Guid courseId, Guid sectionId);
 
         //CourseSectionTopic Feature
+        Task<PagedResultDto<CourseTopicDto>> GetCourseSectionTopicListAsync(Guid courseId, Guid sectionId);
         Task AddTopicAsync(CreateUpdateCourseTopicDto input, Guid sectionId, Guid courseId);
         Task UpdateTopicAsync(CreateUpdateCourseTopicDto input, Guid courseId, Guid sectionId, Guid topicId);
     }

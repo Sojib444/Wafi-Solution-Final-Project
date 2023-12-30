@@ -26,6 +26,16 @@ namespace Kidoo.Learn.Courses
 
         //Course Feature
         //Path: CourseAppService --> CourseManager --> Domain layer for UpdateCreateDomain
+        public async Task<PagedResultDto<CourseDto>> GetListAsync()
+        {
+            var course = await _courseRepository.GetQueryableAsync();
+
+            var courseDtos = ObjectMapper.Map<IQueryable<Course>, List<CourseDto>>(course);
+
+            var totalCount = courseDtos.Count();
+
+            return new PagedResultDto<CourseDto>(totalCount, courseDtos);
+        }
         public async Task<CourseDto> CreateCourseAsync(CreateUpdateCourseDto input)
         {
             var isExistTitle = await _courseRepository.AnyAsync(x => x.Title == input.Title);
@@ -83,7 +93,8 @@ namespace Kidoo.Learn.Courses
             await _courseRepository.DeleteAsync(entity, true);
         }
 
-        //Course Feature
+
+        //CourseSection Feature
         //Path: CourseAppService --> CourseManager --> Domain layer for UpdateCreateDomain
         public async Task<PagedResultDto<CourseSectionDto>> GetCouresSectionsListAsync(Guid courseId)
         {
@@ -166,6 +177,26 @@ namespace Kidoo.Learn.Courses
                 await _courseRepository.UpdateAsync(course);            
         }
 
+
+        //CourseSectionTopic Feauture
+        public async Task<PagedResultDto<CourseTopicDto>> GetCourseSectionTopicListAsync(Guid courseId, Guid sectionId)
+        {
+            var course = await (await _courseRepository.GetQueryableAsync())
+                .Where(x => x.Id == courseId)
+                .Include(x => x.Sections)
+                .ThenInclude(x => x.Topics)
+                .FirstOrDefaultAsync();
+
+            var section = course.Sections.Where(x => x.Id == sectionId).FirstOrDefault();
+            var sectionTopic = section.Topics.Where(x => x.CourseSectionId == sectionId).ToList();
+
+            var courseTopicDto = ObjectMapper.Map<IEnumerable<CourseTopic>, List<CourseTopicDto>>(sectionTopic);
+
+            var totalTopicCount = courseTopicDto.Count();
+
+            return new PagedResultDto<CourseTopicDto>(totalTopicCount, courseTopicDto);
+        }
+
         public async Task AddTopicAsync(CreateUpdateCourseTopicDto input, Guid sectionId, Guid courseId)
         {
             var course = await (await _courseRepository.GetQueryableAsync()).Where(x => x.Id == courseId).Include(x => x.Sections)
@@ -186,17 +217,6 @@ namespace Kidoo.Learn.Courses
             course.UpdateTopic(topicId, input.Title, input.VideoDurationInMinutes, input.VideoUrl, sectionId, input.ThumbnailUrl);
 
             await _courseRepository.UpdateAsync(course);
-        }
-
-        public async Task<PagedResultDto<CourseDto>> GetListAsync()
-        {
-            var course = await _courseRepository.GetQueryableAsync();
-
-            var courseDtos = ObjectMapper.Map<IQueryable<Course>, List<CourseDto>>(course);
-
-            var totalCount = courseDtos.Count();
-
-            return new PagedResultDto<CourseDto>(totalCount, courseDtos);
         }
     }
 }

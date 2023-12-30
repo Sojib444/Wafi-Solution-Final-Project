@@ -10,6 +10,10 @@ namespace Kidoo.Learn.Web.Pages.CourseSectionTopics
         [BindProperty(SupportsGet = true)]
         public Guid SectionId { get; set; }
 
+        [HiddenInput]
+        [BindProperty(SupportsGet = true)]
+        public Guid CourseId { get; set; }
+
         [BindProperty(SupportsGet = true)]
         public string SectionName { get; set; }
 

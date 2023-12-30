@@ -24,7 +24,7 @@ namespace Kidoo.Learn.DbMigrator.Topics
                     "Introducton",
                     20,
                     "www.youtube.com",
-                    new Guid("9365D3E9-BFBE-452E-85A9-2142E629A9F0"),
+                    new Guid("0749C759-3336-06A5-51AB-3A0FCB9C70D4"),
                     "www.google.com"));
 
                 await _topicRepository.InsertAsync(new CourseTopic(
@@ -32,7 +32,7 @@ namespace Kidoo.Learn.DbMigrator.Topics
                    "Begining",
                    20,
                    "www.youtube.com",
-                   new Guid("9365D3E9-BFBE-452E-85A9-2142E629A9F0"),
+                   new Guid("0749C759-3336-06A5-51AB-3A0FCB9C70D4"),
                    "www.google.com"));
 
                 await _topicRepository.InsertAsync(new CourseTopic(
@@ -40,7 +40,7 @@ namespace Kidoo.Learn.DbMigrator.Topics
                   "Advanced",
                   20,
                   "www.youtube.com",
-                  new Guid("9365D3E9-BFBE-452E-85A9-2142E629A9F0"),
+                  new Guid("015676E5-512F-CD88-198E-3A0FCB9C9CD8"),
                   "www.google.com"));
 
                 await _topicRepository.InsertAsync(new CourseTopic(
@@ -48,7 +48,15 @@ namespace Kidoo.Learn.DbMigrator.Topics
                   "Conclution",
                   20,
                   "www.youtube.com",
-                  new Guid("9365D3E9-BFBE-452E-85A9-2142E629A9F0"),
+                  new Guid("015676E5-512F-CD88-198E-3A0FCB9C9CD8"),
+                  "www.google.com"));
+
+                await _topicRepository.InsertAsync(new CourseTopic(
+                  Guid.NewGuid(),
+                  "Summary",
+                  20,
+                  "www.youtube.com",
+                  new Guid("015676E5-512F-CD88-198E-3A0FCB9C9CD8"),
                   "www.google.com"));
             }
         }

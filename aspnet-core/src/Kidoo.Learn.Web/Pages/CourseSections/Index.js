@@ -30,8 +30,8 @@ $(function () {
                                 {
                                     text: l('Topics'),
                                     action: function (data) {
-                                        console.log("topics");
-                                        window.location.href = '/CourseSectionTopics?sectionid=' + data.record.id + '&sectionname=' + data.record.title;
+                                        window.location.href = '/CourseSectionTopics?sectionid='
+                                            + data.record.id + '&sectionname=' + data.record.title + '&courseid=' + courseId;
                                     }
                                 },
                                 {
