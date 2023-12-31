@@ -75,10 +75,6 @@ $(function () {
                 {
                     title: l('Max Age'),
                     data: "maxAge"
-                },
-                {
-                    title: l('Thumbnil Url'),
-                    data: "thumbnailUrl"
                 }
             ]
         })

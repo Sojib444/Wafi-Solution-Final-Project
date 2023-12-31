@@ -1,5 +1,4 @@
 ﻿using Kidoo.Learn.Consts.Course;
-using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
 namespace Kidoo.Learn.Courses
@@ -7,7 +6,7 @@ namespace Kidoo.Learn.Courses
     public class CreateUpdateCourseDto
     {
         [Required]
-        public IFormFile Thumbnail { get; set; }
+        public FormFile Thumbnail { get; set; }
 
         [Required(ErrorMessage = "Tittle is required")]
         [StringLength(CourseConsts.MaxTitleLength, ErrorMessage = "Title cannot exceed {1} characters")]

@@ -7,7 +7,7 @@ namespace Kidoo.Learn.Courses
 {
     public class CourseDto : EntityDto<Guid>
     {
-        public string ThumbnailUrl { get; set; }
+        public FormFile Thumbnail { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public int NumberOfLectures { get; set; }

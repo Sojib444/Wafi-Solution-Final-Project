@@ -2,9 +2,11 @@
 using Kidoo.Learn.CourseTopics;
 using Kidoo.Learn.DomainDtos.CourseSections;
 using Kidoo.Learn.DomainDtos.CourseTopics;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp;
@@ -65,9 +67,9 @@ namespace Kidoo.Learn.Courses
 
             await _courseManager.UpdateCourseAsync(
                 entity,
-                input.Thummbnail.FileName,
-                input.Thummbnail.ContentType,
-                input.Thummbnail.ContentDisposition.GetBytes(),
+                input.Thumbnail.FileName,
+                input.Thumbnail.ContentType,
+                input.Thumbnail.ContentDisposition.GetBytes(),
                 input.Title,
                 input.Description,
                 input.NumberOfLectures,
@@ -84,7 +86,15 @@ namespace Kidoo.Learn.Courses
             if (course == null)
                 throw new UserFriendlyException("Couldn't find the course");
 
-            return ObjectMapper.Map<Course, CourseDto>(course);
+
+            var coursedto = ObjectMapper.Map<Course, CourseDto>(course);
+
+            coursedto.Thumbnail = new FormFile(
+                course.ThumbnailFileName,
+                course.ThumbnailFileType,
+                course.ThumbnailFileContent); 
+
+            return coursedto;
         }
 
         public async Task DeleteCourseAsync(Guid courseId)

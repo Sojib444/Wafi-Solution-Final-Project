@@ -11,7 +11,6 @@ namespace Kidoo.Learn.Web.Pages.Courses
         [BindProperty(SupportsGet = true)]
         public Guid Id { get; set; }
 
-        [HiddenInput]
         [BindProperty(SupportsGet = true)]
         public UpdateCourseDto Course { get; set; }
 
