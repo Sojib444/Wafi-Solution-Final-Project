@@ -22,6 +22,22 @@ public static class LearnPermissions
         public const string Delete = Default + ".Delete";
     }
 
+    public static class Sections
+    {
+        public const string Default = GroupName + ".CourseSections";
+        public const string Create = Default + ".Create";
+        public const string Edit = Default + ".Edit";
+        public const string Delete = Default + ".Delete";
+    }
+
+    public static class Tpoics
+    {
+        public const string Default = GroupName + ".CourseSectionTopics";
+        public const string Create = Default + ".Create";
+        public const string Edit = Default + ".Edit";
+        public const string Delete = Default + ".Delete";
+    }
+
     public static class Question
     {
         public const string Default = GroupName + ".Questions";

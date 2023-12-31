@@ -26,6 +26,22 @@ public class LearnPermissionDefinitionProvider : PermissionDefinitionProvider
         coursePermission.AddChild(LearnPermissions.Courses.Delete, L("Delete"));
         #endregion
 
+        #region Section permission
+        var courseSectionGroupName = context.AddGroup("Sections", L("Sections"));
+        var sectionPermission = courseSectionGroupName.AddPermission(LearnPermissions.Sections.Default, L("Sections"));
+        sectionPermission.AddChild(LearnPermissions.Sections.Create, L("Create"));
+        sectionPermission.AddChild(LearnPermissions.Sections.Edit, L("Edit"));
+        sectionPermission.AddChild(LearnPermissions.Sections.Delete, L("Delete"));
+        #endregion
+
+        #region Topic permission
+        var courseSectionTopicGroupName = context.AddGroup("CourseSectionTopics", L("CourseSectionTopics"));
+        var sectionTopicPermission = courseSectionTopicGroupName.AddPermission(LearnPermissions.Tpoics.Default, L("CourseSectionTopics"));
+        sectionTopicPermission.AddChild(LearnPermissions.Tpoics.Create, L("Create"));
+        sectionTopicPermission.AddChild(LearnPermissions.Tpoics.Edit, L("Edit"));
+        sectionTopicPermission.AddChild(LearnPermissions.Tpoics.Delete, L("Delete"));
+        #endregion
+
         #region Question permission
         var questionGroupName = context.AddGroup("Questions", L("Questions"));
         var questionPermission = questionGroupName.AddPermission(LearnPermissions.Question.Default, L("Questions"));

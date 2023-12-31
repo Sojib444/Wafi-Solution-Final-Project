@@ -20,6 +20,7 @@ namespace Kidoo.Learn.Courses
         private readonly IRepository<Course, Guid> _courseRepository;
         public CourseAppService(ICourseManager courseManager, IRepository<Course, Guid> courseRepository)
         {
+            
             _courseManager = courseManager;
             _courseRepository = courseRepository;
         }
@@ -40,7 +41,7 @@ namespace Kidoo.Learn.Courses
         {
             var isExistTitle = await _courseRepository.AnyAsync(x => x.Title == input.Title);
             if (isExistTitle)
-                throw new BusinessException($"Course already exist with '{input.Title}' title");
+                throw new UserFriendlyException($"Course already exist with '{input.Title}' title");
 
             var course = await _courseManager.CreateCourseAsync(
                 input.ThumbnailUrl,
