@@ -174,7 +174,7 @@ namespace Kidoo.Learn.Courses
             await _courseRepository.UpdateAsync(course);
         }
 
-        public async Task DeleteSectionAsync(CreateUpdateCourseSectionDto input, Guid courseId, Guid sectionId)
+        public async Task DeleteSectionAsync(Guid courseId, Guid sectionId)
         {
             var course = await (await _courseRepository.GetQueryableAsync()).Where(x => x.Id == courseId)
                                     .Include(x => x.Sections).FirstOrDefaultAsync();
@@ -182,15 +182,7 @@ namespace Kidoo.Learn.Courses
             if (course == null)
                 throw new BusinessException("Course couldn't found");
 
-            course.DeleteSection(sectionId,
-                input.File.FileName,
-                input.File.ContentType,
-                input.File.ContentDisposition.GetBytes(),
-                input.Title, 
-                input.VideoDurationInMinutes,
-                input.MinAge,
-                input.MaxAge, 
-                courseId);
+            course.DeleteSection(sectionId);
 
                 await _courseRepository.UpdateAsync(course);            
         }
@@ -262,7 +254,7 @@ namespace Kidoo.Learn.Courses
             await _courseRepository.UpdateAsync(course);
         }
 
-        public async Task DeleteTopicAsync(CreateUpdateCourseTopicDto input, Guid courseId, Guid sectionId, Guid topicId)
+        public async Task DeleteTopicAsync(Guid courseId, Guid sectionId, Guid topicId)
         {
             var course = await (await _courseRepository.GetQueryableAsync())
                 .Where(x => x.Id == courseId)
@@ -272,17 +264,7 @@ namespace Kidoo.Learn.Courses
 
             var section = course.Sections.Where(x => x.Id == sectionId).FirstOrDefault();
 
-            section.DeleteTopic(
-                topicId,
-                input.Title,
-                input.VideoDurationInMinutes,
-                input.Thumbnail.FileName,
-                input.Thumbnail.ContentType,
-                input.Thumbnail.ContentDisposition.GetBytes(),
-                sectionId,
-                input.Video.FileName,
-                input.Video.ContentType,
-                input.Video.ContentDisposition.GetBytes());
+            section.DeleteTopic(topicId);
 
             await _courseRepository.UpdateAsync(course);
         }

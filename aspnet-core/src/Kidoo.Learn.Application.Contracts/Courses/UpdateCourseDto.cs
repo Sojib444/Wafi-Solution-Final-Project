@@ -1,4 +1,5 @@
 ﻿using Kidoo.Learn.Consts.Course;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
 namespace Kidoo.Learn.Courses
@@ -6,7 +7,7 @@ namespace Kidoo.Learn.Courses
     public class UpdateCourseDto
     {
         [Required(ErrorMessage = "Thumbnail is required")]
-        public FormFile Thumbnail { get; set; }
+        public IFormFile Thumbnail { get; set; }
 
         [Required]
         [StringLength(CourseConsts.MaxTitleLength)]

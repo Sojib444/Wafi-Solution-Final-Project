@@ -6,6 +6,7 @@ namespace Kidoo.Learn.CourseSections
 {
     public class CreateUpdateCourseSectionDto
     {
+        [Required(ErrorMessage = "Thumnail is Required")]
         public IFormFile File { get; set; }
 
         [Required]

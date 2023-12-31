@@ -8,7 +8,7 @@ namespace Kidoo.Learn.Web.Pages.Courses
 {
     public class CreateModal : PageModel
     {
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public CreateUpdateCourseDto Course { get; set; }
 
         private ICourseAppService _courseAppService;

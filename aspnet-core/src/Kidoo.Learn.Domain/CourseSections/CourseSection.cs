@@ -127,16 +127,7 @@ namespace Kidoo.Learn.CourseSections
         }
 
         public CourseSection DeleteTopic(
-            Guid topicId,
-            [NotNull] string title,
-            double videoDurationInMinutes,
-            [NotNull] string videoFileName,
-            [NotNull] string videoFileType,
-            [NotNull] byte[] videoFileContent,
-            Guid courseSectionId,
-            [NotNull] string thumbnailFileName,
-            [NotNull] string thumbnailFileType,
-            [NotNull] byte[] thumbnailFileContent)
+            Guid topicId)
         {
             var topic = Topics.FirstOrDefault(t => t.Id == topicId);
 

@@ -37,7 +37,7 @@ $(function () {
                                     },
                                     action: function (data) {
                                         kidoo.learn.courses.course
-                                            .deleteTopic(data.record, courseId, sectionId, data.record.id)
+                                            .deleteTopic(courseId, sectionId, data.record.id)
                                             .then(function () {
                                                 abp.notify.info(
                                                     l('SuccessfullyDeleted')

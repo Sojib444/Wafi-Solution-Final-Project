@@ -26,7 +26,6 @@ public class LearnApplicationAutoMapperProfile : Profile
         #region Course Mapping
         CreateMap<Course, CourseDto>().ReverseMap();
         CreateMap<CreateUpdateCourseDto, Course>().ReverseMap();
-
         CreateMap<CourseTopic, CourseTopicDto>().ReverseMap();
         CreateMap<CourseSection, CourseSectionDto>().ReverseMap();
         CreateMap<CourseSection, CourseTopicDto>().ReverseMap();

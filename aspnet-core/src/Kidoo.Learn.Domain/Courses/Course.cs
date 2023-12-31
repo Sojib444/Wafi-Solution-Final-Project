@@ -111,15 +111,7 @@ namespace Kidoo.Learn.Courses
         }
 
         public Course DeleteSection(
-            Guid sectionId,
-            [NotNull] string thumbnailFileName,
-            [NotNull] string thumbnailFileType,
-            [NotNull] byte[] thumbnailFileContent,
-            [NotNull] string title,
-            double videoDurationInMinutes,
-            int minAge,
-            int maxAge,
-            Guid courseId)
+            Guid sectionId)
         {
             var section = GetSection(sectionId);
 

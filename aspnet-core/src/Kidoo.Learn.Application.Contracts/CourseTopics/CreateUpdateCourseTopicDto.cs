@@ -6,6 +6,7 @@ namespace Kidoo.Learn.CourseTopics
 {
     public class CreateUpdateCourseTopicDto
     {
+        [Required(ErrorMessage = "Video is Required")]
         public IFormFile Thumbnail { get; set; }
 
         [Required(ErrorMessage = "Title is Required")]
